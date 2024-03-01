@@ -1,5 +1,4 @@
-
-'use client'
+"use client"
 import React,{ useState } from 'react';
 import styles from '@/styles/login.module.css'; // Import the CSS file
 

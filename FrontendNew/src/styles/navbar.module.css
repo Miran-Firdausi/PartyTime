@@ -25,8 +25,16 @@
     font-style: normal;
     font-size: 24px;
     margin-right: 20px;
-    cursor: pointer; /* Add cursor pointer for better user interaction */
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    transition: color 0.3s ease; /* Smooth transition effect for color change */
   }
+  
+  .logo:hover {
+    color: #ffcc00; /* Change the color on hover */
+  }
+  
   
   /* Update styles for .navbar-location */
   /* Improved styles for .navbar-location */
@@ -129,8 +137,8 @@
     transition: color 0.3s ease;
   }
   
-  .navbar-links a:hover {
-    color: #f0f0f0;
+  .navlink:hover {
+    color: rgb(192, 192, 192);
   }
   
 /* Add styles to make .Login look like a button */
