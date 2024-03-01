@@ -1,0 +1,155 @@
+
+/* navbar.module.css */
+
+/* Global reset */
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #924fe9;
+    color: #fff;
+    padding: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    font-family: "Lobster", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 24px;
+    margin-right: 20px;
+    cursor: pointer; /* Add cursor pointer for better user interaction */
+  }
+  
+  /* Update styles for .navbar-location */
+  /* Improved styles for .navbar-location */
+  .navbar-location {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    display: flex;
+    align-items: center;
+    color: #FFA500; /* Change text color to match the brand color */
+    cursor: pointer;
+    padding: 8px 16px; /* Add padding for better spacing */
+    background-color: transparent; /* Change background color to white */
+    border-radius: 20px; /* Add border radius for a rounded appearance */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Add transition effect for background color and text color */
+    margin-right: 20px;
+    border: 0.5px solid #FFA500; /* Change border color to match the brand color and increase border width */
+  }
+  
+  /* Hover effect */
+  .navbar-location:hover {
+    background-color: #FFA500; /* Change background color on hover to match the brand color */
+    color: #fff; /* Change text color on hover to white */
+  }
+  
+  
+  .navbar-location span {
+    margin-left: 5px;
+  }
+  
+  
+  .navbar-search {
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Allow the search bar to expand and fill the available space */
+  }
+  
+  .navbar-search input[type="text"] {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 100%; /* Make the input field fill the entire available width */
+  }
+  .navbar-search input[type="text"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px #FFA500; /* Add focus effect */
+  }
+  
+  /* Adjust styles for the search button */
+  .navbar-search button {
+    background-color: #ff9900;
+    border: none;
+    cursor: pointer;
+    padding: 8px; /* Add padding for better spacing */
+    border-radius: 0 5px 5px 0; /* Add border radius for rounded corners */
+    margin-left: -1px; /* Move the button slightly to the left to align with the input field */
+    vertical-align: middle; /* Align the button vertically in the middle */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+    transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
+    width: 50px;
+  }
+  
+  .navbar-search button:hover {
+    transform: scale(1.05); /* Grow the button on hover */
+  }
+  
+  
+  /* Ensure the button sticks to the search bar */
+  .navbar-search {
+    position: relative;
+    display: inline-flex; /* Use inline-flex to allow vertical alignment */
+    align-items: center; /* Align items vertically in the center */
+  }
+  
+  .navbar-search input[type="text"] {
+    padding: 8px 16px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px 0 0 5px; /* Add border radius for rounded corners */
+    margin-right: -1px; /* Move the input field slightly to the right to align with the button */
+    width: calc(100% - 40px); /* Calculate width to account for button width and margin */
+    vertical-align: middle; /* Align the input field vertically in the middle */
+  }
+  
+  
+  .navbar-links {
+    font-family: "Lato", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    margin-left: 50px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar-links a {
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    margin-right: 20px;
+    transition: color 0.3s ease;
+  }
+  
+  .navbar-links a:hover {
+    color: #f0f0f0;
+  }
+  
+/* Add styles to make .Login look like a button */
+.Login {
+  display: inline-block;
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #ff9900;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none; /* Remove underline if it's an anchor element */
+  font-size: 16px; /* Adjust font size as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+  transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
+}
+
+/* Hover effect */
+.Login:hover {
+  transform: scale(1.05); /* Grow the button on hover */
+}
+
