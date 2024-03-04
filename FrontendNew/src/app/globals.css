@@ -8,41 +8,77 @@
   box-sizing: border-box;
 }
 
-.slider {
+.product-slider {
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 95%; /* Set the width to 80% of the container */
+  height: auto;
+  padding-bottom: 20px;
+  margin: 0 auto; /* Center the slider horizontally */
+  top: 50px; /* Add top margin */
+  border: 0.5px solid gray;
+  border-radius: 10px;
 }
 
-.slider-inner {
+.product-slider-inner {
   display: flex;
   transition: transform 0.5s ease;
+  margin-top: 20px; /* Increase the gap between products */
+  gap: 5px;
 }
 
-.slide {
-  flex: 0 0 calc(100% / 3);
-  width: calc(100% / 3);
+.product-item {
+  flex: 0 0 calc(100% / 6);
+  width: calc(100% / 6);
+  padding: 0 10px;
+}
+
+.product-details {
   text-align: center;
-  padding: 20px;
-  border: 1px solid #ccc;
+  margin-top: 10px;
 }
 
-.prev,
-.next {
+.product-details h3 {
+  margin-bottom: 5px;
+}
+
+.product-details p {
+  margin: 0;
+}
+
+.prev-btn,
+.next-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: #333;
+  background-color: #d2d1d1;
   color: #fff;
-  padding: 10px 20px;
+  padding: 10px 15px;
   border: none;
   cursor: pointer;
+  z-index: 1;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3); /* Add box shadow */
 }
 
-.prev {
-  left: 10px;
+
+.prev-btn {
+  left: 0px;
+  border-radius: 50%;
 }
 
-.next {
-  right: 10px;
+.next-btn {
+  right: 0px;
+  border-radius: 50%;
+}
+
+/* Disable button styles */
+.prev-btn:disabled,
+.next-btn:disabled {
+  background-color: #595858;
+  cursor: not-allowed;
+}
+
+.ButtonImg {
+  height: 20px;
+  width: 20px;
 }

@@ -1,6 +1,7 @@
 
 "use client"
-import React, { useState } from 'react';
+import React, { useState,useRef, useEffect  } from 'react';
+import Product from './ProductItem';
 
 const products = [
     {
@@ -75,10 +76,9 @@ const products = [
     }
   ];
 
-const Slider = () => {
+  const Slider = () => {
     const [startIndex, setStartIndex] = useState(0);
-    const itemsPerPage = 3; // Number of divs visible at a time
-    const totalItems = 5; // Total number of divs
+    const itemsPerPage = 6; // Number of products visible at a time
   
     const handlePrev = () => {
       const newIndex = Math.max(0, startIndex - 1);
@@ -86,25 +86,33 @@ const Slider = () => {
     };
   
     const handleNext = () => {
-      const newIndex = Math.min(totalItems - itemsPerPage, startIndex + 1);
+      const newIndex = Math.min(products.length - itemsPerPage, startIndex + 1);
       setStartIndex(newIndex);
     };
   
     return (
-      <div className="slider">
-        <div className="slider-inner" style={{ transform: `translateX(-${startIndex * (100 / itemsPerPage)}%)` }}>
-          {/* Mapping through all divs */}
-          {Array.from({ length: totalItems }, (_, index) => (
-            <div className="slide" key={index}>
-              {/* Content for each div */}
-              <h2>Div {index + 1}</h2>
+      <div className="product-slider">
+        <div className="product-slider-inner" style={{ transform: `translateX(-${startIndex * (100 / itemsPerPage)}%)` }}>
+          {products.map((product, index) => (
+            <div className="product-item" key={index}>
+              <Product
+                name={product.name}
+                originalPrice={product.originalPrice}
+                discountedPrice={product.discountedPrice}
+                image={product.image}
+                details={product.details}
+              />
             </div>
           ))}
         </div>
-        <button className="prev" onClick={handlePrev} disabled={startIndex === 0}>Previous</button>
-        <button className="next" onClick={handleNext} disabled={startIndex === totalItems - itemsPerPage}>Next</button>
+        <button className="prev-btn" onClick={handlePrev} disabled={startIndex === 0}>
+          <img className="ButtonImg" src="/images/left-arrow.png" alt="Previous" />
+        </button>
+        <button className="next-btn" onClick={handleNext} disabled={startIndex === products.length - itemsPerPage}>
+          <img className="ButtonImg" src="/images/right-arrow.png" alt="Next" />
+        </button>
       </div>
     );
   };
 
-export default Slider;
+  export default Slider
