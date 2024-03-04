@@ -1,7 +1,8 @@
 
 "use client"
-import React, { useState,useRef, useEffect  } from 'react';
+import React, { useState } from 'react';
 import Product from './ProductItem';
+import styles from "@/styles/productsList.module.css"
 
 const products = [
     {
@@ -76,7 +77,7 @@ const products = [
     }
   ];
 
-  const Slider = () => {
+  const Slider = (props) => {
     const [startIndex, setStartIndex] = useState(0);
     const itemsPerPage = 6; // Number of products visible at a time
   
@@ -91,10 +92,12 @@ const products = [
     };
   
     return (
-      <div className="product-slider">
-        <div className="product-slider-inner" style={{ transform: `translateX(-${startIndex * (100 / itemsPerPage)}%)` }}>
+      <div>
+        <h2 className={styles.title}>{props.title}</h2>
+        <div className={styles["product-slider"]}>
+        <div className={styles["product-slider-inner"]} style={{ transform: `translateX(-${startIndex * (100 / itemsPerPage)}%)` }}>
           {products.map((product, index) => (
-            <div className="product-item" key={index}>
+            <div className={styles["product-item"]} key={index}>
               <Product
                 name={product.name}
                 originalPrice={product.originalPrice}
@@ -105,14 +108,14 @@ const products = [
             </div>
           ))}
         </div>
-        <button className="prev-btn" onClick={handlePrev} disabled={startIndex === 0}>
-          <img className="ButtonImg" src="/images/left-arrow.png" alt="Previous" />
+        <button className={styles["prev-btn"]} onClick={handlePrev} disabled={startIndex === 0}>
+          <img className={styles["ButtonImg"]} src="/images/left-arrow.png" alt="Previous" />
         </button>
-        <button className="next-btn" onClick={handleNext} disabled={startIndex === products.length - itemsPerPage}>
-          <img className="ButtonImg" src="/images/right-arrow.png" alt="Next" />
+        <button className={styles["next-btn"]} onClick={handleNext} disabled={startIndex === products.length - itemsPerPage}>
+          <img className={styles["ButtonImg"]} src="/images/right-arrow.png" alt="Next" />
         </button>
+      </div>
       </div>
     );
   };
-
   export default Slider
