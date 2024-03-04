@@ -22,7 +22,7 @@ const AuthForm = () => {
           <p>{isLogin ? 'Or login with:' : 'Or signup with:'}</p>
           <div className={styles.socialButtons}>
             <button className={styles.googleButton}>
-              <img src="/images/icons8-google-96.png" alt="Google Logo" className={styles.logo} />
+              <img src="/icons/icons8-google-96.png" alt="Google Logo" className={styles.logo} />
               {isLogin ? 'Sign in with Google' : 'Signup with Google'}
             </button>
           </div>
