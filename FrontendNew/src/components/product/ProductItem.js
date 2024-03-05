@@ -7,8 +7,28 @@ const Product = ({ name, originalPrice, discountedPrice, image, details }) => {
   const [showQuantitySelector, setShowQuantitySelector] = useState(false);
 
   const handleAddToCart = () => {
-    // Add to cart logic here
+    setQuantity(1); // Reset quantity to 1 when 'Add' button is clicked
+    setShowQuantitySelector(true); // Show quantity selector when 'Add' button is clicked
     console.log(`Added ${quantity} ${name}(s) to cart`);
+  };
+
+  const handleQuantityChange = (newQuantity) => {
+    // Ensure quantity is positive
+    if (newQuantity >= 0) {
+      setQuantity(newQuantity);
+      // If quantity becomes 0, switch back to add button
+      if (newQuantity === 0) {
+        setShowQuantitySelector(false);
+      }
+    }
+  };
+
+  const handleQuantityButtonClick = () => {
+    if (showQuantitySelector) {
+      // If quantity selector is visible, reset quantity to zero and switch to add button
+      setQuantity(0);
+      setShowQuantitySelector(false);
+    }
   };
 
   return (
@@ -28,14 +48,14 @@ const Product = ({ name, originalPrice, discountedPrice, image, details }) => {
             </div>
             <div className={styles.quantity}>
               {!showQuantitySelector ? (
-                <button className={styles.addButton} onClick={() => setShowQuantitySelector(true)}>
+                <button className={styles.addButton} onClick={handleAddToCart}>
                   Add
                 </button>
               ) : (
                 <div className={styles.quantitySelector}>
-                  <button onClick={() => setQuantity(quantity - 1)}>-</button>
-                  <button onClick={() => setShowQuantitySelector(false)}>{quantity}</button>
-                  <button onClick={() => setQuantity(quantity + 1)}>+</button>
+                  <button onClick={() => handleQuantityChange(quantity - 1)}>-</button>
+                  <button onClick={handleQuantityButtonClick}>{quantity}</button>
+                  <button onClick={() => handleQuantityChange(quantity + 1)}>+</button>
                 </div>
               )}
             </div>
