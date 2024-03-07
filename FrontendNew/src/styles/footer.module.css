@@ -1,89 +1,95 @@
-/* Footer Styles */
 .footer {
-    background-color: #f8f9fa;
-    padding: 50px;
-  
-    border-top-left-radius: 20px; /* Curved top left border */
-    border-top-right-radius: 20px; /* Curved top right border */
-    background-color: #d6cdd6;
-  }
-  
-  .footer .container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-  }
-  
-  .footer h5 {
-    margin-bottom: 20px;
-  }
-  
-  .footer ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer ul li {
-    margin-bottom: 10px;
-  }
-  
-  .footer ul li a {
-    color: #6c757d;
-    text-decoration: none;
-  }
-  
-  .footer ul li a:hover {
-    color: #495057;
-  }
-  
-  .footer .subscribe-form {
-    display: flex;
-    flex-wrap: wrap;
-  }
-  
-  .footer .subscribe-form label {
-    display: none;
-  }
-  
-  .footer .subscribe-form input[type="text"],
- .subscribeButton {
-    margin-right: 10px;
-  }
-  
-  .footer .subscribe-form input[type="text"] {
-    flex-grow: 1;
-    padding: 8px;
-  }
-  
-.subscribeButton {
-    padding: 8px 20px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .footer .subscribe-form button:hover {
-    background-color: #0056b3;
-  }
-  
-  .footer .social-links {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-  }
-  
-  .footer .social-links li {
-    margin-right: 10px;
-  }
-  
-  .footer .social-links li a {
-    color: #6c757d;
-    text-decoration: none;
-  }
-  
-  .footer .social-links li a:hover {
-    color: #495057;
-  }
+  background-color: #7faddb;
+  padding: 50px 0;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.footer-section h5 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.footer-section ul {
+ 
+  list-style: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin-bottom: 5px;
+}
+
+.subscribe-form {
+  margin-top: 20px;
+}
+
+.subscribe-form label {
+  display: none;
+}
+
+.subscribe-form input {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.subscribe-form button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.border-top {
+  border-top: 1px solid #dee2e6;
+  margin-top: 20px;
+}
+
+.py-4 {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.my-4 {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+
+.social-links {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.social-links li {
+  display: inline-block;
+}
+
+.social-links a {
+  color: #007bff;
+}
+
+.social-links svg {
+  width: 24px;
+  height: 24px;
+}
+
+.footer-section ul li a {
+  text-decoration: none;
+}
