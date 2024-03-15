@@ -24,7 +24,7 @@ export default function Store(){
     
     return (
         <div className="Store">
-            <Navbar  totalQuantity={totalQuantity} totalPrice={totalPrice}/>
+            <Navbar  totalQuantity={totalQuantity} totalPrice={totalPrice} on={true}/>
             <div className="Advertising">Advertising</div>
             <ProductsList title="Snacks & Munchies" addToCart={addToCart}/>
             <ProductsList title="Dairy, Bread & Eggs" addToCart={addToCart}/>

@@ -12,6 +12,11 @@
     color: #fff;
     padding: 1rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     
   }
   
@@ -52,7 +57,7 @@
     border-radius: 20px; /* Add border radius for a rounded appearance */
     transition: background-color 0.3s ease, color 0.3s ease; /* Add transition effect for background color and text color */
     margin-right: 20px;
-    border: 0.5px solid #FFA500; /* Change border color to match the brand color and increase border width */
+    border: 2px solid #FFA500; /* Change border color to match the brand color and increase border width */
   }
   
   /* Hover effect */
@@ -166,10 +171,30 @@
 }
 
 .cart {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100px;
   background-color: #ff9900;
   padding: 0 5px;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
   transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
+}
+
+.cart>span {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.cartImage {
+  height: 30px;
+  margin-right: 6px;
+  justify-self: left;
+}
+
+.qty {
+  font-size: 13px;
+  font-weight: 800;
 }
 

@@ -25,10 +25,26 @@ const Navbar = (props) => {
         <Link className={styles.navlink} href="/about">About</Link>
         <Link className={styles.navlink} href="/store">Store</Link>
         <Link className={styles.Login} href="/login">Login</Link>
-        <div className={styles.cart}>
-          <div>{props.totalQuantity}</div>
-          <div>₹{props.totalPrice}</div>
-        </div>
+        {
+        props.on && (
+            <div className={styles.cart}>
+              <img className={styles.cartImage} src="/icons/icons8-cart-96.png" alt="Cart"/>
+              {props.totalQuantity === 0 || props.totalPrice === 0 ? (
+                <>
+                  <span>My Cart</span>
+                </>
+              ) : (
+                <div className={styles.qty}>
+                  { /* Only render the total quantity and price if they are not zero */ }
+                  <div>{props.totalQuantity} Items</div>
+                  <div>₹{props.totalPrice}</div>
+                </div>
+              )}
+            </div>
+          )
+        }
+
+
       </div>
     </nav>
   );
