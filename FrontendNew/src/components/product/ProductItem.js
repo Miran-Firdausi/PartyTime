@@ -2,33 +2,44 @@
 import React, { useState } from 'react';
 import styles from '@/styles/product.module.css'; // Import CSS module for styling
 
-const Product = ({ name, originalPrice, discountedPrice, image, weight }) => {
+const Product = ({ name, originalPrice, discountedPrice, image, weight, addToCart }) => {
   const [quantity, setQuantity] = useState(1);
   const [showQuantitySelector, setShowQuantitySelector] = useState(false);
 
-  const handleAddToCart = () => {
-    setQuantity(1); // Reset quantity to 1 when 'Add' button is clicked
-    setShowQuantitySelector(true); // Show quantity selector when 'Add' button is clicked
-    console.log(`Added ${quantity} ${name}(s) to cart`);
+  const handleAddToCart = (isAdded) => {
+      addToCart(1, discountedPrice, isAdded)
   };
 
-  const handleQuantityChange = (newQuantity) => {
-    // Ensure quantity is positive
-    if (newQuantity >= 0) {
-      setQuantity(newQuantity);
-      // If quantity becomes 0, switch back to add button
-      if (newQuantity === 0) {
+  const handleQuantityChange = (operation) => {
+    if (operation === 'increment') {
+      handleAddToCart('increment');
+      setQuantity(quantity + 1);
+    } else if (operation === 'decrement') {
+      handleAddToCart('decrement');
+      if (quantity > 0) {
+        setQuantity(quantity - 1);
+      }
+      if(quantity === 1){
+        setQuantity(0);
         setShowQuantitySelector(false);
       }
     }
   };
+  
 
   const handleQuantityButtonClick = () => {
     if (showQuantitySelector) {
       // If quantity selector is visible, reset quantity to zero and switch to add button
+      handleAddToCart(quantity);
       setQuantity(0);
       setShowQuantitySelector(false);
     }
+    else {
+      handleAddToCart('increment');
+      setQuantity(1);
+      setShowQuantitySelector(true);
+    }
+    
   };
 
   return (
@@ -48,14 +59,14 @@ const Product = ({ name, originalPrice, discountedPrice, image, weight }) => {
             </div>
             <div className={styles.quantity}>
               {!showQuantitySelector ? (
-                <button className={styles.addButton} onClick={handleAddToCart}>
+                <button className={styles.addButton} onClick={handleQuantityButtonClick}>
                   Add
                 </button>
               ) : (
                 <div className={styles.quantitySelector}>
-                  <button className={styles.minus} onClick={() => handleQuantityChange(quantity - 1)}>-</button>
+                  <button className={styles.minus} onClick={() => handleQuantityChange('decrement')}>-</button>
                   <button className={styles.qty} onClick={handleQuantityButtonClick}>{quantity}</button>
-                  <button className={styles.plus} onClick={() => handleQuantityChange(quantity + 1)}>+</button>
+                  <button className={styles.plus} onClick={() => handleQuantityChange('increment')}>+</button>
                 </div>
               )}
             </div>

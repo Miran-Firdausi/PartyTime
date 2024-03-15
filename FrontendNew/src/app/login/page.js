@@ -1,7 +1,11 @@
 import AuthForm from '@/components/AuthForm';
+import Navbar from '@/components/Navbar';
 
 const Login = () => {
-  return <AuthForm />;
+  return <div>
+    <Navbar />
+    <AuthForm />
+  </div>;
 };
 
 export default Login;

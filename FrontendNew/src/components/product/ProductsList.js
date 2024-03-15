@@ -287,7 +287,7 @@ const products = [
     }
   ];
 
-  export default function ProductsList() {
+  export default function ProductsList({ addToCart }) {
     const productsListRef = useRef(null);
   
     const handleScrollLeft = () => {
@@ -324,6 +324,7 @@ const products = [
               discountedPrice={product.discountedPrice}
               image={product.image}
               weight={product.weight}
+              addToCart={addToCart} 
             />
           ))}
         </div>

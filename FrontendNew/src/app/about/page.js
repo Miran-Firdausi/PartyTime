@@ -1,10 +1,13 @@
 // AboutPage.js
 import React from 'react';
 import styles from '@/styles/about.module.css';
+import Navbar from '@/components/Navbar';
 
 const AboutPage = () => {
   return (
-    <div className={styles.aboutPage}>
+    <div>
+      <Navbar />
+      <div className={styles.aboutPage}>
       <h1>About PartyTime</h1>
       <p>In the contemporary retail landscape, a pressing challenge emerges from the imminent expiration of perishable goods, resulting in economic losses for shopkeepers and missed opportunities for consumers seeking discounted products. Simultaneously, the event planning sector encounters obstacles in efficiently procuring large quantities of supplies. Addressing this dual challenge, our proposed solution introduces an innovative e-commerce platform that seamlessly connects surplus perishable items nearing expiration with the demand for bulk orders for parties and events. This platform not only mitigates economic losses for shopkeepers but also offers event planners and hosts a dedicated space to conveniently purchase a wide array of supplies, including discounted perishable goods, party-related items, and non-perishable snacks. By providing a comprehensive solution for both challenges, our platform aims to reduce food waste, optimize party planning processes, and create a mutually beneficial ecosystem for shopkeepers and consumers alike.</p>
       
@@ -17,6 +20,7 @@ const AboutPage = () => {
         <li><strong>Logistics and Delivery Optimization:</strong> Establish a robust logistics system to handle the challenges of delivering bulk orders, providing users with flexible delivery options and reliable service.</li>
         <li><strong>Geolocation Integration:</strong> Integrate geolocation services to identify the user's location and display nearby shopkeepers with discounted products. Ensure real-time updates for accuracy.</li>
       </ul>
+    </div>
     </div>
   );
 };
