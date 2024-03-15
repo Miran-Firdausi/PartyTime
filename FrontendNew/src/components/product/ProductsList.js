@@ -1,174 +1,336 @@
 
 "use client"
-import React, { useState, useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import Product from './ProductItem';
 import styles from "@/styles/productsList.module.css"
 
 const products = [
     {
-      name: "Lays 1",
+      name: "Lays Classic Family Size",
       originalPrice: 30,
       discountedPrice: 25,
       image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      weight: "200g"
     },
     {
-      name: "Lays 2",
+      name: "Cheetos Firindan",
+      originalPrice: 35,
+      discountedPrice: 33,
+      image: '/images/product/Cheetos.png',
+      weight: "200g"
+    },
+    {
+      name: "Cheetos Bag of Bones",
       originalPrice: 30,
       discountedPrice: 25,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/CheetosBB.png',
+      weight: "200g"
     },
     {
-      name: "Lays 3",
+      name: "Monster Energy Drink",
+      originalPrice: 50,
+      discountedPrice: 45,
+      image: '/images/product/Monster.png',
+      weight: "200g"
+    },
+    {
+      name: "Coke Classic",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/CokeClassic.png',
+      weight: "200g"
+    },
+    {
+      name: "Cold Drinks Pack of 3",
+      originalPrice: 100,
+      discountedPrice: 90,
+      image: '/images/product/ColdDrinks.png',
+      weight: "200g"
+    },
+    {
+      name: "Doritos Cool Ranch",
       originalPrice: 20,
       discountedPrice: 18,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/DoritosCoolRanch.png',
+      weight: "200g"
     },
     {
-      name: "Lays 4",
+      name: "Cold Drinks pack of 5",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/cold5.png',
+      weight: "200g"
+    },
+    {
+      name: "Lays Classic Family Size",
       originalPrice: 30,
       discountedPrice: 25,
       image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      weight: "200g"
     },
     {
-      name: "Lays 5",
+      name: "Doritos Supreme Cheese",
+      originalPrice: 10,
+      discountedPrice: 8,
+      image: '/images/product/Doritos.png',
+      weight: "200g"
+    },
+    {
+      name: "Oreo Mega Pack",
       originalPrice: 30,
       discountedPrice: 25,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/Oreo.png',
+      weight: "200g"
     },
     {
-      name: "Lays 6",
+      name: "Cheetos Firindan",
+      originalPrice: 35,
+      discountedPrice: 33,
+      image: '/images/product/Cheetos.png',
+      weight: "200g"
+    },
+    {
+      name: "Cheetos Bag of Bones",
       originalPrice: 30,
       discountedPrice: 25,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/CheetosBB.png',
+      weight: "200g"
     },
     {
-      name: "Lays 7",
+      name: "Doritos Supreme Cheese",
+      originalPrice: 10,
+      discountedPrice: 8,
+      image: '/images/product/Doritos.png',
+      weight: "200g"
+    },
+    {
+      name: "Oreo Mega Pack",
       originalPrice: 30,
       discountedPrice: 25,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/Oreo.png',
+      weight: "200g"
     },
     {
-      name: "Lays 8",
+      name: "Monster Energy Drink",
+      originalPrice: 50,
+      discountedPrice: 45,
+      image: '/images/product/Monster.png',
+      weight: "200g"
+    },
+    {
+      name: "Coke Classic",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/CokeClassic.png',
+      weight: "200g"
+    },
+    {
+      name: "Cold Drinks Pack of 3",
+      originalPrice: 100,
+      discountedPrice: 90,
+      image: '/images/product/ColdDrinks.png',
+      weight: "200g"
+    },
+    {
+      name: "Doritos Cool Ranch",
       originalPrice: 20,
       discountedPrice: 18,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/DoritosCoolRanch.png',
+      weight: "200g"
     },
     {
-      name: "Lays 9",
+      name: "Cold Drinks pack of 5",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/cold5.png',
+      weight: "200g"
+    },
+    {
+      name: "Lays Classic Family Size",
       originalPrice: 30,
       discountedPrice: 25,
       image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      weight: "200g"
     },
     {
-      name: "Lays 10",
+      name: "Doritos Supreme Cheese",
+      originalPrice: 10,
+      discountedPrice: 8,
+      image: '/images/product/Doritos.png',
+      weight: "200g"
+    },
+    {
+      name: "Oreo Mega Pack",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/Oreo.png',
+      weight: "200g"
+    },
+    {
+      name: "Cheetos Firindan",
+      originalPrice: 35,
+      discountedPrice: 33,
+      image: '/images/product/Cheetos.png',
+      weight: "200g"
+    },
+    {
+      name: "Cheetos Bag of Bones",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/CheetosBB.png',
+      weight: "200g"
+    },
+    {
+      name: "Monster Energy Drink",
+      originalPrice: 50,
+      discountedPrice: 45,
+      image: '/images/product/Monster.png',
+      weight: "200g"
+    },
+    {
+      name: "Coke Classic",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/CokeClassic.png',
+      weight: "200g"
+    },
+    {
+      name: "Cold Drinks Pack of 3",
+      originalPrice: 100,
+      discountedPrice: 90,
+      image: '/images/product/ColdDrinks.png',
+      weight: "200g"
+    },
+    {
+      name: "Doritos Cool Ranch",
+      originalPrice: 20,
+      discountedPrice: 18,
+      image: '/images/product/DoritosCoolRanch.png',
+      weight: "200g"
+    },
+    {
+      name: "Cold Drinks pack of 5",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/cold5.png',
+      weight: "200g"
+    },
+    {
+      name: "Lays Classic Family Size",
       originalPrice: 30,
       discountedPrice: 25,
       image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      weight: "200g"
     },
     {
-      name: "Lays 11",
+      name: "Doritos Supreme Cheese",
+      originalPrice: 10,
+      discountedPrice: 8,
+      image: '/images/product/Doritos.png',
+      weight: "200g"
+    },
+    {
+      name: "Oreo Mega Pack",
       originalPrice: 30,
       discountedPrice: 25,
-      image: '/images/product/Lays.png',
-      details: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus non sollicitudin nunc."
+      image: '/images/product/Oreo.png',
+      weight: "200g"
+    },
+    {
+      name: "Cheetos Firindan",
+      originalPrice: 35,
+      discountedPrice: 33,
+      image: '/images/product/Cheetos.png',
+      weight: "200g"
+    },
+    {
+      name: "Cheetos Bag of Bones",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/CheetosBB.png',
+      weight: "200g"
+    },
+    {
+      name: "Monster Energy Drink",
+      originalPrice: 50,
+      discountedPrice: 45,
+      image: '/images/product/Monster.png',
+      weight: "200g"
+    },
+    {
+      name: "Coke Classic",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/CokeClassic.png',
+      weight: "200g"
+    },
+    {
+      name: "Cold Drinks Pack of 3",
+      originalPrice: 100,
+      discountedPrice: 90,
+      image: '/images/product/ColdDrinks.png',
+      weight: "200g"
+    },
+    {
+      name: "Doritos Cool Ranch",
+      originalPrice: 20,
+      discountedPrice: 18,
+      image: '/images/product/DoritosCoolRanch.png',
+      weight: "200g"
+    },
+    {
+      name: "Cold Drinks pack of 5",
+      originalPrice: 30,
+      discountedPrice: 25,
+      image: '/images/product/cold5.png',
+      weight: "200g"
     }
   ];
 
-  const Slider = (props) => {
-  const sliderRef = useRef(null);
-  const [startIndex, setStartIndex] = useState(0);
-  const [itemsPerPage, setItemsPerPage] = useState(1); // Initialize with 1
-  const [scrollWidth, setScrollWidth] = useState(0);
-
-  useEffect(() => {
-    const updateItemsPerPage = () => {
-      if (sliderRef.current) {
-        const sliderWidth = sliderRef.current.offsetWidth;
-        const itemWidth = sliderRef.current.querySelector(`.${styles["product-item"]}`).offsetWidth;
-        const maxItemsPerPage = Math.floor(sliderWidth / itemWidth);
-        setItemsPerPage(maxItemsPerPage || 1); // Ensure at least one item per page
+  export default function ProductsList() {
+    const productsListRef = useRef(null);
+  
+    const handleScrollLeft = () => {
+      if (productsListRef.current) {
+        productsListRef.current.scrollBy({
+          left: -200, // Adjust as needed
+          behavior: 'smooth'
+        });
       }
     };
-
-    updateItemsPerPage(); // Initial calculation
-    window.addEventListener('resize', updateItemsPerPage);
-
-    return () => {
-      window.removeEventListener('resize', updateItemsPerPage);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (sliderRef.current) {
-      setScrollWidth(sliderRef.current.scrollWidth - sliderRef.current.offsetWidth);
-    }
-  }, [startIndex]);
-
-  const handlePrev = () => {
-    const newIndex = Math.max(0, startIndex - 1);
-    setStartIndex(newIndex);
-  };
-
-  const handleNext = () => {
-    const newIndex = Math.min(products.length - itemsPerPage, startIndex + 1);
-    setStartIndex(newIndex);
-  };
-
-  const handleWheel = (e) => {
-    e.preventDefault();
-    const deltaX = e.deltaX;
-    const deltaY = e.deltaY;
-
-    // Check if horizontal scrolling is significant compared to vertical scrolling
-    if (Math.abs(deltaX) > Math.abs(deltaY)) {
-      // Adjust scrolling speed by multiplying deltaX
-      const scrollSpeed = 0.1; // Adjust the value for desired speed
-      if (sliderRef.current) {
-        sliderRef.current.scrollLeft += deltaX * scrollSpeed;
+  
+    const handleScrollRight = () => {
+      if (productsListRef.current) {
+        productsListRef.current.scrollBy({
+          left: 200, // Adjust as needed
+          behavior: 'smooth'
+        });
       }
-    }
-  };
-
-  return (
-    <div className={styles["slider-container"]}>
-      <h2 className={styles.title}>{props.title}</h2>
-      <div className={styles["slider-wrapper"]} onWheel={handleWheel}>
-        <div className={styles["product-slider"]} ref={sliderRef}>
-          <div className={styles["product-slider-inner"]} style={{ transform: `translateX(-${startIndex * (100 / itemsPerPage)}%)` }}>
-            {products.map((product, index) => (
-              <div className={styles["product-item"]} key={index}>
-                <Product
-                  name={product.name}
-                  originalPrice={product.originalPrice}
-                  discountedPrice={product.discountedPrice}
-                  image={product.image}
-                  details={product.details}
-                />
-              </div>
-            ))}
-          </div>
+    };
+  
+    return (
+      <div className={styles.productsListOuterContainer}>
+      <span className={styles.productsListTitle}>Chips, Biscuits and Cold Drinks</span>
+      <div className={styles.productsListContainer}>
+        <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={handleScrollLeft}>
+          <img src="/images/left-arrow.png" alt="Left Arrow" />
+        </button>
+        <div className={styles.productsList} ref={productsListRef}>
+          {products.map((product, index) => (
+            <Product
+              key={index}
+              name={product.name}
+              originalPrice={product.originalPrice}
+              discountedPrice={product.discountedPrice}
+              image={product.image}
+              weight={product.weight}
+            />
+          ))}
         </div>
-        <div className={styles["button-container"]}>
-          <button className={styles["prev-btn"]} onClick={handlePrev} disabled={startIndex === 0}>
-            <img className={styles["ButtonImg"]} src="/images/left-arrow.png" alt="Previous" />
-          </button>
-          <button className={styles["next-btn"]} onClick={handleNext} disabled={startIndex === products.length - itemsPerPage || scrollWidth === sliderRef.current?.scrollLeft}>
-            <img className={styles["ButtonImg"]} src="/images/right-arrow.png" alt="Next" />
-          </button>
-        </div>
+        <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={handleScrollRight}>
+          <img src="/images/right-arrow.png" alt="Right Arrow" />
+        </button>
       </div>
-    </div>
-  );
-};
-
-export default Slider;
+      </div>
+    );
+  }

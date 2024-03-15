@@ -11,10 +11,11 @@
   border: 1.5px solid rgb(151, 148, 148);
   border-radius: 10px;
   padding-bottom: 15px;
-  width: 200px; /* Set a fixed width for the product div */
+  width: 180px; /* Set a fixed width for the product div */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add initial box shadow */
   transition: box-shadow 0.3s, transform 0.3s; /* Add transition effect */
   background-color: white;
+  cursor: pointer;
 }
 
 .product:hover {
@@ -25,6 +26,7 @@
 .productImage {
   height: 150px;
   padding: 20px 40px 10px 40px;
+  object-fit: cover;
 }
 
 .info {
@@ -43,15 +45,17 @@
 }
 
 .name {
-  font-size: 18px;
+  font-size: 15px;
   margin-bottom: 5px;
+  color: rgb(26, 25, 25);
+  min-height: 42px;
+  overflow: auto;
 }
 
-.productDetails {
+.productWeight {
   margin-bottom: 10px;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  font-size: 0.8rem;
+  color: grey;
 }
 
 .priceContainer {
@@ -59,9 +63,9 @@
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  padding: 0 20px;
-  position: relative;
-  right: 20px;
+  padding: 0;
+  font-size: 12px;
+  padding-right: 5px;
 }
 
 .originalPrice {
@@ -72,10 +76,7 @@
 
 .discountedPrice {
   font-weight: bold;
-}
-
-.quantity {
-  margin-top: 10px;
+  color: rgb(22, 22, 22);
 }
 
 .addButton,
@@ -83,57 +84,40 @@
   background-color: #FFA500;
   color: #fff;
   border: none;
-  border-radius: 5px;
-  padding: 8px;
   cursor: pointer;
   font-size: 14px;
-  margin: 0 -4px;
-}
-
-.quantitySelector {
-  display: flex;
-  align-items: center;
-  border: none;
-  cursor: pointer;
-  height: 30px;
-  border-radius: 5px;
-  position: relative;
-  left: 30px;
-  top: 2px;
-  margin-bottom: 15px;
-}
-
-.quantitySelector span {
-  font-size: 20px;
-  padding: 0 8px;
+  margin: 0 -1px;
 }
 
 .addButton {
-  position: relative;
-  left: 28px; 
-  margin-bottom: 10px;
-  width: 50px;
+  padding: 8px;
+  border-radius: 5px;
+  width: 59px;
 }
 
-/* product.module.css */
+/* .quantitySelector {
+  width: 57px;
+} */
 
-.productDetails {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100%;
+.minus {
+  padding: 8px 5px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
 }
 
-/* product.module.css */
+.plus {
+  padding: 8px 5px;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
 
-.productDetails:hover {
-  white-space: normal; /* Display full text on hover */
-  overflow: visible; /* Prevent overflow of full text */
-  z-index: 9999; /* Ensure the tooltip is on top of other elements */
-  position: relative; /* Position the tooltip relative to the product */
-  top: -1px; /* Adjust the top position to move the tooltip above the text */
-  background-color: rgba(255, 255, 255, 0.9); /* Background color for tooltip */
-  padding: 10px; /* Padding for tooltip */
-  border-radius: 5px; /* Border radius for tooltip */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.3); /* Shadow for tooltip */
+.totalPrice {
+  margin-top: 5px;
+  color: rgb(35, 34, 34);
+  font-size: 0.9rem;
+}
+
+.qty {
+  padding: 8px 0;
+  width: 30px;
 }

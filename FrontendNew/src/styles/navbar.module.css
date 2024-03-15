@@ -41,7 +41,7 @@
   /* Improved styles for .navbar-location */
   .navbar-location {
     font-family: "Lato", sans-serif;
-    font-weight: 400;
+    font-weight: 800;
     font-style: normal;
     display: flex;
     align-items: center;
@@ -70,7 +70,8 @@
   .navbar-search {
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Allow the search bar to expand and fill the available space */
+    width: 500px;
+    height: 50px;
   }
   
   .navbar-search input[type="text"] {
@@ -79,6 +80,7 @@
     border-radius: 5px;
     margin-right: 10px;
     width: 100%; /* Make the input field fill the entire available width */
+    height: 80%;
   }
   .navbar-search input[type="text"]:focus {
     outline: none;
@@ -97,6 +99,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
     transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
     width: 50px;
+    height: 40px;
   }
   
   .navbar-search button:hover {
@@ -143,7 +146,7 @@
   }
   
 /* Add styles to make .Login look like a button */
-.Login {
+.Login{
   display: inline-block;
   padding: 10px 20px; /* Adjust padding as needed */
   background-color: #ff9900;
@@ -158,7 +161,15 @@
 }
 
 /* Hover effect */
-.Login:hover {
+.Login:hover, .cart:hover {
   transform: scale(1.05); /* Grow the button on hover */
+}
+
+.cart {
+  background-color: #ff9900;
+  padding: 0 5px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Add shadow */
+  transition: transform 0.2s ease-in-out; /* Add transition for hover effect */
 }
 

@@ -1,12 +1,12 @@
 
-import Slider from "@/components/product/ProductsList";
+import ProductsList from "@/components/product/ProductsList";
 
 export default function Store(){
     return (
         <div className="Store">
             <div className="Advertising">Advertising</div>
-            <Slider title="Snacks & Munchies"/>
-            <Slider title="Dairy, Bread & Eggs"/>
+            <ProductsList title="Snacks & Munchies"/>
+            <ProductsList title="Dairy, Bread & Eggs"/>
         </div>
     )
 }

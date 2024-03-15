@@ -1,10 +1,20 @@
-import React from 'react';
+"use client"
+import React, {useState} from 'react';
 import { FaSearch, FaStore, FaInfoCircle, FaMapMarkerAlt, FaUser } from 'react-icons/fa';
 import styles from '@/styles/navbar.module.css'
 import Image from 'next/image';
 import Link from 'next/link';
 
 const Navbar = () => {
+
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const addToCart = (quantity, price) => {
+    setTotalQuantity(totalQuantity + quantity);
+    setTotalPrice(totalPrice + price);
+  };
+  
   return (
     <nav className={styles.navbar}>
       <div className={styles['navbar-left']}>
@@ -23,6 +33,10 @@ const Navbar = () => {
         <Link className={styles.navlink} href="/about">About</Link>
         <Link className={styles.navlink} href="/store">Store</Link>
         <Link className={styles.Login} href="/login">Login</Link>
+        <div className={styles.cart}>
+          <div>Cart {totalQuantity} Items</div>
+          <div>{totalPrice}</div>
+        </div>
       </div>
     </nav>
   );
