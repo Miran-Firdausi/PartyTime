@@ -11,7 +11,7 @@ const Hero = () => {
           <button className={styles.btn}>Explore Now</button>
         </div>
         <div className={styles.heroImage}>
-          <Image src="/images/hero-image.png" alt="Hero Image" width={400} height={400} />
+          <img src="/images/hero-image.png" alt="Hero Image" width={400} height={400} />
         </div>
       </div>
     </div>

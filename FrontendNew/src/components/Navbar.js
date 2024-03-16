@@ -24,7 +24,7 @@ const Navbar = (props) => {
       <div className={styles['navbar-links']}>
         <Link className={styles.navlink} href="/about">About</Link>
         <Link className={styles.navlink} href="/store">Store</Link>
-        <Link className={styles.Login} href="/login">Login</Link>
+        <Link className={styles.Login} href="/login"><img src="/icons/icons8-user-profile-96.png" alt="Login" />Login</Link>
         {
         props.on && (
             <div className={styles.cart}>

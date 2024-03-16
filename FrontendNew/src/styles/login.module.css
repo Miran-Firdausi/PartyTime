@@ -102,3 +102,9 @@
     text-decoration: underline;
   }
   
+
+  @media only screen and (max-width: 767px) {
+    .loginContainer {
+      height: calc(100dvh - 227px);
+    }
+  }

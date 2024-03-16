@@ -152,8 +152,12 @@
   
 /* Add styles to make .Login look like a button */
 .Login{
-  display: inline-block;
-  padding: 10px 20px; /* Adjust padding as needed */
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0px 10px; /* Adjust padding as needed */
+  width: 100px;
+  height: 40px;
   background-color: #ff9900;
   color: #fff;
   border: none;
@@ -168,6 +172,10 @@
 /* Hover effect */
 .Login:hover, .cart:hover {
   transform: scale(1.05); /* Grow the button on hover */
+}
+
+.Login img {
+  height:25px;
 }
 
 .cart {
@@ -198,3 +206,48 @@
   font-weight: 800;
 }
 
+
+@media only screen and (max-width: 767px) {
+  .navbar {
+      flex-direction: column;
+      padding: 1rem; /* Adjust padding for better spacing */
+    }
+
+  .navbar-left,
+  .navbar-links {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1rem; /* Add space between sections */
+      justify-content: space-between;
+  }
+
+  .navbar-search {
+      width: 100%;
+      margin-bottom: 1rem; /* Add space between sections */
+  }
+
+  .navbar-search input[type="text"] {
+      width: calc(100% - 65px); /* Adjust input width */
+  }
+
+  .Login,
+  .cart {
+      width: calc(100% - 30px); /* Adjust button width */
+      margin-bottom: 0.5rem; /* Add less space between buttons */
+      height: 50px;
+  }
+
+  .Login img {
+      height: 20px; /* Reduce image height */
+  }
+
+  .cart {
+      padding: 0.5rem; /* Adjust padding */
+      margin-right: 20px;
+  }
+
+  .navbar-links {
+    width: 95%;
+    margin-right: 20px;
+  }
+}

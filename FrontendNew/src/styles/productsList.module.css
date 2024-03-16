@@ -8,8 +8,9 @@
 .productsListTitle {
   margin: 0 auto;
   width: 95%;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   margin-bottom: 5px;
+  font-weight: 500;
 }
 
 .productsListContainer {
