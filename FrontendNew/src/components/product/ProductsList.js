@@ -287,7 +287,7 @@ const products = [
     }
   ];
 
-  export default function ProductsList({ addToCart }) {
+  export default function ProductsList({ category = "Chips, Biscuits and Cold Drinks",addToCart }) {
     const productsListRef = useRef(null);
   
     const handleScrollLeft = () => {
@@ -310,7 +310,7 @@ const products = [
   
     return (
       <div className={styles.productsListOuterContainer}>
-      <span className={styles.productsListTitle}>Chips, Biscuits and Cold Drinks</span>
+      <span className={styles.productsListTitle}>{category}</span>
       <div className={styles.productsListContainer}>
         <button className={`${styles.scrollButton} ${styles.scrollLeft}`} onClick={handleScrollLeft}>
           <img src="/images/left-arrow.png" alt="Left Arrow" />
