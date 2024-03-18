@@ -1,0 +1,34 @@
+.cartContainer {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-top: 20px;
+  }
+  
+  .cartHeader {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .emptyCartMessage {
+    font-style: italic;
+  }
+  
+  .cartItemsList {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .cartItem {
+    margin-bottom: 5px;
+  }
+  
+  .itemName {
+    font-weight: bold;
+  }
+  
+  .itemPrice {
+    font-size: 18px;
+    color: #333;
+  }
+  

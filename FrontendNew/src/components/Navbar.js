@@ -27,7 +27,7 @@ const Navbar = (props) => {
         <Link className={styles.Login} href="/login"><img src="/icons/icons8-user-profile-96.png" alt="Login" />Login</Link>
         {
         props.on && (
-            <div className={styles.cart}>
+            <Link className={styles.cart} href="/cart">
               <img className={styles.cartImage} src="/icons/icons8-cart-96.png" alt="Cart"/>
               {props.totalQuantity === 0 || props.totalPrice === 0 ? (
                 <>
@@ -40,7 +40,7 @@ const Navbar = (props) => {
                   <div>₹{props.totalPrice}</div>
                 </div>
               )}
-            </div>
+            </Link>
           )
         }
 
