@@ -1,7 +1,8 @@
 from django.db import models
 
-#shopping_app/models.py
+
 from django.db import models
+#from  .serializers import ProductSerializer
 from datetime import datetime
 from django.utils import timezone
 
@@ -20,10 +21,12 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     originalPrice = models.DecimalField(max_digits=10, decimal_places=2,null=True)
     discountedPrice=models.DecimalField(max_digits=10, decimal_places=2, null=True )
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True)
     image = models.ImageField(upload_to='product_images/',null=True)
     weight = models.DecimalField(max_digits=10, decimal_places=2, default=default_weight)
     expiry_date = models.DateField(default=default_expiry_date)
+
+
 
     def __str__(self):
         return self.name

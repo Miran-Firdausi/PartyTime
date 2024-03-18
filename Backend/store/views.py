@@ -1,5 +1,9 @@
 from django.shortcuts import render
 from django.http import JsonResponse
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .models import Product
+from .serializers import ProductSerializer
 
 
 def index(request):
@@ -7,3 +11,10 @@ def index(request):
         'message': 'Django is working correctly',
     }
     return JsonResponse(message)
+
+
+@api_view(['GET'])
+def getProducts(request):
+    products = Product.objects.all()  # Query all products
+    serializer = ProductSerializer(products, many=True)  # Serialize the products
+    return Response(serializer.data)  # Ret
