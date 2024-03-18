@@ -13,8 +13,8 @@ def index(request):
     return JsonResponse(message)
 
 
-@api_view(['GET'])
+#@api_view(['GET'])
 def getProducts(request):
     products = Product.objects.all()  # Query all products
     serializer = ProductSerializer(products, many=True)  # Serialize the products
-    return Response(serializer.data)  # Ret
+    return JsonResponse(serializer.data,safe=False)  # Ret
