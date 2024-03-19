@@ -1,3 +1,4 @@
+// Seller.js
 "use client"
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
@@ -13,7 +14,8 @@ const Seller = ({ seller = "SellerLoginName" }) => {
             discountedPrice: 25,
             image: '/images/product/Lays.png',
             weight: "200g",
-            quantity: 5
+            quantity: 5,
+            category: "Chips"
         },
         {
             name: "Cheetos Firindan",
@@ -21,7 +23,17 @@ const Seller = ({ seller = "SellerLoginName" }) => {
             discountedPrice: 33,
             image: '/images/product/Cheetos.png',
             weight: "200g",
-            quantity: 5
+            quantity: 5,
+            category: "Chips"
+        },
+        {
+            name: "Oreo Biscuit",
+            originalPrice: 35,
+            discountedPrice: 33,
+            image: '/images/product/Oreo.png',
+            weight: "200g",
+            quantity: 5,
+            category: "Cold Drinks"
         }
     ]);
 
@@ -31,7 +43,8 @@ const Seller = ({ seller = "SellerLoginName" }) => {
         discountedPrice: '',
         image: '',
         weight: '',
-        quantity: ''
+        quantity: '',
+        category: ''
     });
 
     const [showForm, setShowForm] = useState(false);
@@ -60,26 +73,21 @@ const Seller = ({ seller = "SellerLoginName" }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Add the new product to the products array
-        setProducts(prevProducts => [...prevProducts, formData]);
-        // Clear the form fields
+        setProducts(prevProducts => [...(prevProducts || []), { ...formData, category: formData.category }]);
         setFormData({
             name: '',
             originalPrice: '',
             discountedPrice: '',
             image: '',
             weight: '',
-            quantity: ''
+            quantity: '',
+            category: ''
         });
-        // Hide the form after submission
         setShowForm(false);
     };
 
-
     const totalSales = 2060;
     const averageRating = 4.5;
-
-
 
     return (
         <div className={styles.main}>
@@ -101,29 +109,29 @@ const Seller = ({ seller = "SellerLoginName" }) => {
                         <h3>Average Rating</h3>
                         <p>{averageRating}</p>
                         </div>
-                    </div>
+                        </div>
                 </div>
             </div>
-                <div>
-                    <div className={styles.productTitle}>
-                        <h1>Products</h1>
-                        <button className={styles.sellerProductAdd} onClick={() => setShowForm(true)}> Add </button>
-                        {showForm && (
-                            <ProductForm
-                                formData={formData}
-                                handleInputChange={handleInputChange}
-                                handleImageUpload={handleImageUpload}
-                                handleSubmit={handleSubmit}
-                                setShowForm={setShowForm}
-                            />
-                        )}
-                    </div>
-
-                    <SellerProductsList category='Your Products' products={products} setProducts={setProducts} />
+            <div>
+                <div className={styles.productTitle}>
+                    <h1>Products</h1>
+                    <button className={styles.sellerProductAdd} onClick={() => setShowForm(true)}> Add </button>
+                    {showForm && (
+                        <ProductForm
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            handleImageUpload={handleImageUpload}
+                            handleSubmit={handleSubmit}
+                            setShowForm={setShowForm}
+                        />
+                    )}
+                </div>
+                <SellerProductsList category='Chips' products={products} setProducts={setProducts} />
+                <SellerProductsList category='Biscuits' products={products} setProducts={setProducts} />
+                <SellerProductsList category='Cold Drinks' products={products} setProducts={setProducts} />
+                {/* Add more SellerProductsList components with different categories as needed */}
             </div>
         </div>
-
-
     );
 }
 

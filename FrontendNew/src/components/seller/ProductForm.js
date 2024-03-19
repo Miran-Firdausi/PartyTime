@@ -1,4 +1,5 @@
 // ProductForm.js
+"use client"
 import React from 'react';
 import styles from '@/styles/seller.module.css';
 
@@ -31,6 +32,15 @@ const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSub
                     <div>
                         Quantity
                         <input type="number" name="quantity" value={formData.quantity} onChange={handleInputChange} placeholder="Quantity" required />
+                    </div>
+                    <div>
+                        Category
+                        <select className={styles.category} name="category" value={formData.category} onChange={handleInputChange} required>
+                            <option value="">Category</option>
+                            <option value="Chips">Chips</option>
+                            <option value="Biscuits">Biscuits</option>
+                            <option value="Cold Drinks">Cold Drinks</option>
+                        </select>
                     </div>
                     <div className={styles.buttons}>
                         <button className={styles.closeButton} onClick={() => setShowForm(false)}>Close</button>

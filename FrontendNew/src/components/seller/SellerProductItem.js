@@ -1,3 +1,4 @@
+// SellerProductItem.js
 "use client"
 import React from 'react';
 import styles from '@/styles/product.module.css'; // Import CSS module for styling
@@ -32,4 +33,3 @@ const Product = ({ id, name, originalPrice, discountedPrice, image, weight, quan
 };
 
 export default Product;
-
