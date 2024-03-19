@@ -16,9 +16,11 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True)
+
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name']
+        fields = ['email', 'phone', 'password', 'first_name', 'last_name']
 
 
 class CustomerSerializer(serializers.ModelSerializer):
