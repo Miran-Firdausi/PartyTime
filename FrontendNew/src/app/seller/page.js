@@ -1,42 +1,39 @@
 // Seller.js
 "use client"
+// Seller.js
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import SellerProductsList from '@/components/seller/SellerProductsList';
 import styles from '@/styles/seller.module.css';
-import ProductForm from '@/components/seller/ProductForm'; 
+import ProductForm from '@/components/seller/ProductForm';
 
 const Seller = ({ seller = "SellerLoginName" }) => {
     const [products, setProducts] = useState([
         {
+            id: 1,
             name: "Lays Classic Family Size",
             originalPrice: 30,
             discountedPrice: 25,
             image: '/images/product/Lays.png',
             weight: "200g",
             quantity: 5,
-            category: "Chips"
+            category: "Snacks"
         },
         {
+            id: 2,
             name: "Cheetos Firindan",
             originalPrice: 35,
             discountedPrice: 33,
             image: '/images/product/Cheetos.png',
             weight: "200g",
             quantity: 5,
-            category: "Chips"
-        },
-        {
-            name: "Oreo Biscuit",
-            originalPrice: 35,
-            discountedPrice: 33,
-            image: '/images/product/Oreo.png',
-            weight: "200g",
-            quantity: 5,
-            category: "Cold Drinks"
+            category: "Snacks"
         }
     ]);
 
+    const categories = ["Snacks", "Beverages", "Dairy", "Fruits", "Vegetables", "Bakery"];
+
+    
     const [formData, setFormData] = useState({
         name: '',
         originalPrice: '',
@@ -44,10 +41,11 @@ const Seller = ({ seller = "SellerLoginName" }) => {
         image: '',
         weight: '',
         quantity: '',
-        category: ''
+        category: categories[0] // Default to the first category
     });
 
     const [showForm, setShowForm] = useState(false);
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -73,7 +71,9 @@ const Seller = ({ seller = "SellerLoginName" }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setProducts(prevProducts => [...(prevProducts || []), { ...formData, category: formData.category }]);
+        // Add the new product to the products array
+        setProducts(prevProducts => [...prevProducts, { ...formData, id: Date.now() }]);
+        // Clear the form fields
         setFormData({
             name: '',
             originalPrice: '',
@@ -81,9 +81,11 @@ const Seller = ({ seller = "SellerLoginName" }) => {
             image: '',
             weight: '',
             quantity: '',
-            category: ''
+            category: categories[0] // Reset to the first category
         });
+        // Hide the form after submission
         setShowForm(false);
+
     };
 
     const totalSales = 2060;
@@ -92,7 +94,7 @@ const Seller = ({ seller = "SellerLoginName" }) => {
     return (
         <div className={styles.main}>
             <h2 className={styles.marginMe}>Hello {seller}, </h2>
-
+            
             <div>  
                 <h1 className={styles.marginMe}>Analytics</h1>  
                 <div className={styles.analytics}> 
@@ -118,18 +120,27 @@ const Seller = ({ seller = "SellerLoginName" }) => {
                     <button className={styles.sellerProductAdd} onClick={() => setShowForm(true)}> Add </button>
                     {showForm && (
                         <ProductForm
-                            formData={formData}
-                            handleInputChange={handleInputChange}
-                            handleImageUpload={handleImageUpload}
-                            handleSubmit={handleSubmit}
-                            setShowForm={setShowForm}
-                        />
+                        formData={formData}
+                        handleInputChange={handleInputChange}
+                        handleImageUpload={handleImageUpload}
+                        handleSubmit={handleSubmit}
+                        setShowForm={setShowForm}
+                        categories={categories} // Pass the categories array as a prop
+                    />
+                    
                     )}
                 </div>
-                <SellerProductsList category='Chips' products={products} setProducts={setProducts} />
-                <SellerProductsList category='Biscuits' products={products} setProducts={setProducts} />
-                <SellerProductsList category='Cold Drinks' products={products} setProducts={setProducts} />
-                {/* Add more SellerProductsList components with different categories as needed */}
+                {categories.map(category => {
+    const filteredProducts = products.filter(product => product.category === category);
+    if (filteredProducts.length > 0) {
+        return (
+            <SellerProductsList key={category} category={category} products={filteredProducts} setProducts={setProducts} />
+        );
+    } else {
+        return null; // Don't render if there are no products
+    }
+})}
+
             </div>
         </div>
     );

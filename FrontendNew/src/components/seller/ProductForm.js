@@ -3,7 +3,7 @@
 import React from 'react';
 import styles from '@/styles/seller.module.css';
 
-const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSubmit, setShowForm }) => {
+const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSubmit, setShowForm, categories }) => {
     return (
         <div className={styles.popup}>
             <div className={styles.popupContent}>
@@ -36,10 +36,9 @@ const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSub
                     <div>
                         Category
                         <select className={styles.category} name="category" value={formData.category} onChange={handleInputChange} required>
-                            <option value="">Category</option>
-                            <option value="Chips">Chips</option>
-                            <option value="Biscuits">Biscuits</option>
-                            <option value="Cold Drinks">Cold Drinks</option>
+                        {categories.map((category, index) => (
+                        <option key={index} value={category}>{category}</option>
+                    ))}
                         </select>
                     </div>
                     <div className={styles.buttons}>
