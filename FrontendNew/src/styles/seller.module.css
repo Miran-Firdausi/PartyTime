@@ -10,14 +10,21 @@
     align-items: center;
 }
 
-.marginMe {
+.marginMe, .marginMe2 {
     margin-top: 3rem;
     margin-left: 1.5rem;
 }
 
+.marginMe2 {
+    display: flex;
+    justify-content: center;
+}
+
 .analytics {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 8rem;
+
 }
 
 .metric {
@@ -28,7 +35,7 @@
 }
 
 .graph img {
-    height: 30rem;
+    height: 20rem;
 }
 
 .popupContent {

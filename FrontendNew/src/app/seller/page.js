@@ -96,7 +96,7 @@ const Seller = ({ seller = "SellerLoginName" }) => {
             <h2 className={styles.marginMe}>Hello {seller}, </h2>
             
             <div>  
-                <h1 className={styles.marginMe}>Analytics</h1>  
+                <h1 className={styles.marginMe2}>Analytics</h1>  
                 <div className={styles.analytics}> 
                     <div className={styles.graph}>
                         <img src='/images/graph.png'/>
