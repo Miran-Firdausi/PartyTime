@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login as auth_login, logout as aut
 from django.middleware.csrf import get_token
 from rest_framework.permissions import IsAuthenticated
 
-from .models import Customer
+from .models import Customer, User
 from .serializers import CustomerSerializer, UserSerializer, SellerSerializer, MyTokenObtainPairSerializer
 
 from rest_framework.response import Response
@@ -25,6 +25,42 @@ def customer_register(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
+
+
+# @api_view(['POST'])
+# def register_customer(request):
+#     if request.method == 'POST':
+#         serializer = CustomerSerializer(data=request.data)
+#         if serializer.is_valid():
+#             user_data = {
+#                 'email': request.data.get('email'),
+#                 'password': request.data.get('password'),
+#                 'first_name': request.data.get('first_name'),
+#                 'last_name': request.data.get('last_name')
+#             }
+#             user = User.objects.create_user(**user_data)
+#             serializer.save(user=user)
+#             return Response(serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST', 'GET'])
+def register_customer(request):
+    if request.method == 'POST':
+        user_serializer = UserSerializer(data=request.data)
+        customer_serializer = CustomerSerializer(data=request.data)
+
+        if user_serializer.is_valid():
+            user_data = user_serializer.validated_data
+            user = User.objects.create_user(**user_data)
+            customer = Customer.objects.create(user=user)
+
+            return Response({
+                'user': user_serializer.data
+            }, status=status.HTTP_201_CREATED)
+        else:
+            return Response({"error": "Invalid data"}, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response()
 
 
 @api_view(['POST'])
@@ -60,15 +96,6 @@ def login(request):
 def logout(request):
     auth_logout(request)
     return Response({'message': 'Logout successful'}, status=status.HTTP_200_OK)
-
-
-@api_view(['POST', 'GET'])
-def customer_register(request):
-    serializer = CustomerSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED)
-    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST', 'GET'])
