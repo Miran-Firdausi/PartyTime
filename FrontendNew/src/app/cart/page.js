@@ -12,7 +12,8 @@ const cartItems = [
     discountedPrice: 25,
     image: '/images/product/Lays.png',
     weight: "200g",
-    description: "Classic potato chips loved by everyone."
+    description: "Classic potato chips loved by everyone.",
+    quantity: 4
   },
   {
     name: "Oreo Mega Pack",
@@ -20,7 +21,8 @@ const cartItems = [
     discountedPrice: 25,
     image: '/images/product/Oreo.png',
     weight: "200g",
-    description: "Delicious Baked Chocolate Cookies"
+    description: "Delicious Baked Chocolate Cookies",
+    quantity: 2
   },
   {
     name: "Cheetos Firindan",
@@ -28,7 +30,8 @@ const cartItems = [
     discountedPrice: 33,
     image: '/images/product/Cheetos.png',
     weight: "200g",
-    description: "Spicy and crunchy Cheetos snacks."
+    description: "Spicy and crunchy Cheetos snacks.",
+    quantity: 8
   },
   // Add descriptions for other products as needed
 ];

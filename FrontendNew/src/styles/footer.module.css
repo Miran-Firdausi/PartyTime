@@ -1,7 +1,8 @@
 .footer {
-  background-color: #7faddb;
-  border-top-left-radius: 30px;
-  border-top-right-radius: 30px;
+  background-color: #7913ff;
+  z-index: 99999;
+  color: white;
+  box-shadow: 0px -5px 8px rgba(0, 0, 0, 0.2);
 }
 
 .container {
@@ -26,6 +27,7 @@
 }
 
 .footer-section ul {
+  color: rgb(240, 240, 240);
   list-style: none;
   padding: 0;
 }
@@ -50,10 +52,13 @@
 
 .subscribe-form button {
   padding: 10px 20px;
-  background-color: #007bff;
-  color: #fff;
+  background-color: #ff9900;
+  color: #ffffff;
   border: none;
   cursor: pointer;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  font-weight: 700;
 }
 
 .border-top {
@@ -93,6 +98,7 @@
 
 .footer-section ul li a {
   text-decoration: none;
+  color: rgb(240, 240, 240);
 }
 
 /* Media Queries for responsiveness */

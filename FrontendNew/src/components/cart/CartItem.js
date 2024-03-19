@@ -20,7 +20,7 @@ const CartItem = ({ product }) => {
         <p className={styles.productDescription}>{product.description}</p>
         <div className={styles.quantityContainer}>
           <label htmlFor="quantity">Quantity: </label>
-          <select id="quantity" name="quantity" onChange={handleChange} className={styles.quantitySelect}>
+          <select id="quantity" name="quantity" onChange={handleChange} className={styles.quantitySelect} value={product.quantity}>
             {[...Array(10)].map((_, index) => (
               <option key={index} value={index + 1}>{index + 1}</option>
             ))}
