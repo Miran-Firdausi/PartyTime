@@ -79,6 +79,18 @@
   color: rgb(22, 22, 22);
 }
 
+.productQuantity {
+  background-color: lightgreen;
+  padding: 5px;
+  border-radius: 8%;
+  font-size: 0.75rem;
+}
+
+.productQuantity span {
+  font-weight: bold;
+
+}
+
 .addButton,
 .quantitySelector button {
   background-color: #FFA500;
@@ -88,6 +100,8 @@
   font-size: 14px;
   margin: 0 -1px;
 }
+
+
 
 .addButton {
   padding: 8px;
