@@ -1,0 +1,7 @@
+NAME='postgres'
+PORT=6543
+USER='postgres.ljblzfjseufhvqkacopm'
+PASSWORD='mirangautamonkarmihir'
+ENGINE='django.db.backends.postgresql'
+HOST='aws-0-us-west-1.pooler.supabase.com'
+SECRET_KEY='django-insecure-bkd*etv&v_s!cpbv2i7gsh%3!lcjn7!py66mb17y)(0gg493$^'
