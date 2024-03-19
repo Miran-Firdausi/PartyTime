@@ -1,11 +1,24 @@
 "use client"
-import React, {useState} from 'react';
-import { FaSearch, FaStore, FaInfoCircle, FaMapMarkerAlt, FaUser } from 'react-icons/fa';
+import React from 'react';
+import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import styles from '@/styles/navbar.module.css'
-import Image from 'next/image';
 import Link from 'next/link';
 
 const Navbar = (props) => {
+
+  function getLocn(){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+  } else {
+      console.log("Geolocation is not supported by this browser.");
+  }
+    
+  function showPosition(position) {
+      let lat = position.coords.latitude; 
+      let lon = position.coords.longitude;
+      alert("Latitude: "+lat+" Longitude: "+lon);
+  }
+  }
   
   return (
     <nav className={styles.navbar}>
@@ -14,7 +27,7 @@ const Navbar = (props) => {
         <h1><Link className={styles.logo} href="/">Party Time</Link></h1>
         <div className={styles['navbar-location']}>
           <FaMapMarkerAlt />
-          <span>Set Location</span>
+          <span onClick={getLocn}>Set Location</span>
         </div>
       </div>
       <div className={styles['navbar-search']}>

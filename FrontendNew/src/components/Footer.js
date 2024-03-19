@@ -13,6 +13,7 @@ const Footer = () => {
             <li><a href="/store">Store</a></li>
             <li><a href="/cart">Cart</a></li>
             <li><a href="/login">Login</a></li>
+            <li><a href="/seller">Seller Dashboard</a></li>
           </ul>
         </div>
         <div className={styles['footer-section']}>
