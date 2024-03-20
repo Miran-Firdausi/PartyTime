@@ -1,8 +1,12 @@
 
 "use client"
-import { useRef } from 'react';
+import { useRef,useEffect } from 'react';
 import Product from './ProductItem';
 import styles from "@/styles/productsList.module.css"
+
+
+
+
 
 const products = [
     {
@@ -289,6 +293,23 @@ const products = [
 
   export default function ProductsList({ category = "Chips, Biscuits and Cold Drinks",addToCart }) {
     const productsListRef = useRef(null);
+
+     useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/getProducts/');
+        const data = await response.json();
+        //setProducts(data);
+        console.log(data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+
   
     const handleScrollLeft = () => {
       if (productsListRef.current) {
