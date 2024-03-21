@@ -50,7 +50,7 @@
 }
 
 .proceedButton {
-  background-color: #ff9900;
+  background-color: #406ac4;
   color: #fff;
   border: none;
   padding: 8px 18px;
@@ -61,5 +61,5 @@
 }
 
 .proceedButton:hover {
-  background-color: #d47f00;
+  background-color: #385caa;
 }
