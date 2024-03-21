@@ -18,11 +18,13 @@ function sendData(userData) {
     return response.json();
   })
   .then(data => {
-    console.log('Success:', data);
+    console.log('Success: ',data);
+    alert('Registration Success:'+ data);
     // Handle success response here, if needed
   })
   .catch(error => {
-    console.error('Error:', error);
+    alert("Regsitration Failed! Try Again")
+    console.log('Error:'+ error);
     // Handle error here, if needed
   });
 }

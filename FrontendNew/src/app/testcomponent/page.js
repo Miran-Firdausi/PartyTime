@@ -1,11 +1,5 @@
-import Product from "@/components/product/ProductItem";
+import LocationPop from "@/components/LocationPop";
 
-export default function testcomponent(){
-    return <Product 
-        name = "Lays Classic Family Size"
-        originalPrice = "30"
-        discountedPrice = "25"
-        image = "/images/product/Lays.png"
-        weight  = "200g"
-    />
+export default function TestComponent(){
+    return <LocationPop /> 
 }
