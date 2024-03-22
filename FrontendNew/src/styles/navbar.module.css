@@ -251,3 +251,110 @@
     margin-right: 20px;
   }
 }
+
+/* Add styles for the location dropdown menu */
+.locationMenu {
+  position: absolute;
+  top: calc(80% ); 
+  left: 80px;
+  background-color: #fff; /* Background color for the dropdown menu */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Add shadow */
+  padding: 10px 30px; /* Add padding for better spacing */
+  z-index: 1000; /* Ensure the menu appears above other elements */
+  width: 300px; /* Set a fixed width for the menu */
+  padding-bottom: 0;
+}
+
+.locationMenu h3 {
+  color: #313131;
+  font-size: 17px; /* Set font size for the heading */
+  margin-bottom: 10px; /* Add space below the heading */
+}
+
+
+.locationOptions {
+  display: flex;
+  flex-direction: column;
+}
+
+.locationOptions button {
+  border-style: none;
+  border-radius: 5px; /* Add border radius for rounded corners */
+  padding: 8px 16px; /* Add padding for better spacing */
+  margin-bottom: 10px; /* Add space between buttons */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  font-size: 15px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+  background-color: #367ad3;
+  color: white;
+  font-weight: bold;
+}
+
+.locationOptions button:hover {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+.locationOptions input[type="text"] {
+  padding: 8px; /* Add padding for better spacing */
+  border: 1px solid #ccc; /* Add border for the input field */
+  border-radius: 5px; /* Add border radius for rounded corners */
+  margin-bottom: 10px; /* Add space below the input field */
+  width: 100%; /* Make the input field fill the entire available width */
+  margin-bottom: 20px;
+  
+}
+
+/* Input component */
+/* navbar.module.css */
+
+.addressInput {
+  width: 300px;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  
+}
+
+.suggestionsList {
+  position: relative;
+  width: 300px;
+  right: 30px;
+  background-color: #fff;
+
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.suggestionsList li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.suggestion {
+  padding: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  color: black;
+  font-weight: 500;
+  border-bottom: 0.5px solid #d1d1d1;
+}
+
+.suggestion:hover {
+  background-color: #dbdbdb;
+}
+
+
+.currentAddress {
+  font-weight: bold;
+  color: blue;
+  margin-bottom: 10px;
+}
+
+.mapIcon {
+  min-width: 20px;
+ min-width: 20px;
+}

@@ -1,11 +1,10 @@
 from django.contrib.auth.base_user import BaseUserManager
-from django.utils.translation import gettext as _
 
 
 class UserManager(BaseUserManager):
     def create_user(self, email, password, **extra_fields):
         if not email:
-            raise ValueError(_('Users must have an email address'))
+            raise ValueError('Users must have an email address')
         email = self.normalize_email(email)
         user = self.model(email=email, **extra_fields)
         user.set_password(password)
@@ -16,6 +15,13 @@ class UserManager(BaseUserManager):
         extra_fields.setdefault('is_staff', True)
         extra_fields.setdefault('is_superuser', True)
         return self.create_user(email, password, **extra_fields)
+
+
+class CustomerManager(BaseUserManager):
+    def create(self, **extra_fields):
+        customer = self.model(**extra_fields)
+        customer.save()
+        return customer
 
 
 class SellerManager(BaseUserManager):

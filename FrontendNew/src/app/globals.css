@@ -20,21 +20,26 @@ body {
 }
 
 .Advertising {
-  height: 200px;
+  height: 200px; /* You can adjust the height as needed */
   width: 95%;
-  background-color: rgb(112, 214, 112);
   margin: 0 auto;
+  background-color: rgb(112, 214, 112);
   position: relative;
   top: 20px;
   border-radius: 10px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 100px;
   color: rgb(33, 33, 30);
   margin-bottom: 10px;
-  flex-wrap: wrap;
+  overflow: hidden; /* Ensures the image doesn't overflow */
 }
+
+.Advertising img {
+  max-width: 105%;
+  object-fit: cover; /* Ensures the image covers the entire container */
+}
+
 
 /* Media Query for responsiveness */
 @media only screen and (max-width: 768px) {

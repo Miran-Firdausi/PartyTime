@@ -1,9 +1,10 @@
+// SellerProductsList.js
 "use client"
 import React, { useRef } from 'react';
 import Product from '@/components/seller/SellerProductItem';
 import styles from "@/styles/productsList.module.css";
 
-const SellerProductsList = ({ category = "Chips, Biscuits and Cold Drinks", products, setProducts }) => {
+const SellerProductsList = ({ category, products = [], setProducts }) => {
     const productsListRef = useRef(null);
 
     const handleScrollLeft = () => {
@@ -24,6 +25,8 @@ const SellerProductsList = ({ category = "Chips, Biscuits and Cold Drinks", prod
         }
     };
 
+    const filteredProducts = products.filter(product => product.category === category);
+
     return (
         <div className={styles.productsListOuterContainer}>
             <span className={styles.productsListTitle}>{category}</span>
@@ -32,18 +35,17 @@ const SellerProductsList = ({ category = "Chips, Biscuits and Cold Drinks", prod
                     <img src="/images/left-arrow.png" alt="Left Arrow" />
                 </button>
                 <div className={styles.productsList} ref={productsListRef}>
-                    {products.map((product, index) => (
+                    {filteredProducts.map((product, index) => (
                         <Product
-                        id={product.id} // Assuming each product has a unique id
-                        name={product.name}
-                        originalPrice={product.originalPrice}
-                        discountedPrice={product.discountedPrice}
-                        image={product.image}
-                        weight={product.weight}
-                        quantity={product.quantity}
-                   
-                      />
-                      
+                            key={index}
+                            id={product.id}
+                            name={product.name}
+                            originalPrice={product.originalPrice}
+                            discountedPrice={product.discountedPrice}
+                            image={product.image}
+                            weight={product.weight}
+                            quantity={product.quantity}
+                        />
                     ))}
                 </div>
                 <button className={`${styles.scrollButton} ${styles.scrollRight}`} onClick={handleScrollRight}>

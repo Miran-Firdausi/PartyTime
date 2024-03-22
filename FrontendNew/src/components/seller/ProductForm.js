@@ -1,8 +1,9 @@
 // ProductForm.js
+"use client"
 import React from 'react';
 import styles from '@/styles/seller.module.css';
 
-const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSubmit, setShowForm }) => {
+const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSubmit, setShowForm, categories }) => {
     return (
         <div className={styles.popup}>
             <div className={styles.popupContent}>
@@ -31,6 +32,14 @@ const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSub
                     <div>
                         Quantity
                         <input type="number" name="quantity" value={formData.quantity} onChange={handleInputChange} placeholder="Quantity" required />
+                    </div>
+                    <div>
+                        Category
+                        <select className={styles.category} name="category" value={formData.category} onChange={handleInputChange} required>
+                        {categories.map((category, index) => (
+                        <option key={index} value={category}>{category}</option>
+                    ))}
+                        </select>
                     </div>
                     <div className={styles.buttons}>
                         <button className={styles.closeButton} onClick={() => setShowForm(false)}>Close</button>
