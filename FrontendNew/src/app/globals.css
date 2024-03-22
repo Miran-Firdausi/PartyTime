@@ -33,12 +33,9 @@ body {
   color: rgb(33, 33, 30);
   margin-bottom: 10px;
   overflow: hidden; /* Ensures the image doesn't overflow */
+  font-size: 70px;
 }
 
-.Advertising img {
-  max-width: 105%;
-  object-fit: cover; /* Ensures the image covers the entire container */
-}
 
 
 /* Media Query for responsiveness */
