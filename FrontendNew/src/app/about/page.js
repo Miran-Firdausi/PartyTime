@@ -1,7 +1,6 @@
 // AboutPage.js
 import React from 'react';
 import styles from '@/styles/about.module.css';
-import Navbar from '@/components/Navbar';
 
 const AboutPage = () => {
   return (

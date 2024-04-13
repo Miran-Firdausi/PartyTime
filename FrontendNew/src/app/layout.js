@@ -1,17 +1,15 @@
+'use client'
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import "./globals.css";
 import Footer from "@/components/Footer";
+import { CartProvider } from "@/contextapi/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Party Time",
-  description: "Party snacks at prices that make celebrating even sweeter",
-};
-
 export default function RootLayout({ children }) {
   return (
+    <CartProvider>
     <html lang="en">
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,5 +22,6 @@ export default function RootLayout({ children }) {
         <Footer />
       </body>
     </html>
+    </CartProvider>
   );
 }

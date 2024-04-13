@@ -1,30 +1,67 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from '@/styles/product.module.css'; // Import CSS module for styling
+import { useCart } from '@/contextapi/CartContext';
+import { v4 as uuidv4 } from 'uuid';
 
-const Product = ({ name, originalPrice, discountedPrice, image, weight, addToCart }) => {
-  const [quantity, setQuantity] = useState(1);
-  const [showQuantitySelector, setShowQuantitySelector] = useState(false);
-
+const Product = ({ name, originalPrice, discountedPrice, image, weight }) => {
+  const { cart, dispatch } = useCart();
+  const existingProduct = cart.find(item => item.name === name);
+  const [quantity, setQuantity] = useState(existingProduct ? existingProduct.quantity : 0);
+  const [showQuantitySelector, setShowQuantitySelector] = useState(existingProduct ? true : false);
+  
+  
   const handleAddToCart = (isAdded) => {
-      addToCart(1, discountedPrice, isAdded)
+      if (existingProduct) {
+        // If the product already exists in the cart, update its quantity
+        dispatch({
+          type: 'UPDATE_QUANTITY',
+          payload: {
+            id: existingProduct.id,
+            quantity: isAdded === 'increment' ? existingProduct.quantity + 1 : existingProduct.quantity - 1,
+          },
+        });
+      } else {
+        // If the product does not exist in the cart, add it
+        dispatch({
+          type: 'ADD_TO_CART',
+          payload: {
+            id: uuidv4(),
+            name,
+            originalPrice,
+            discountedPrice,
+            image,
+            weight,
+            quantity: 1,
+          },
+        });
+      }
   };
+  
 
   const handleQuantityChange = (operation) => {
     if (operation === 'increment') {
-      handleAddToCart('increment');
       setQuantity(quantity + 1);
+      handleAddToCart('increment');
     } else if (operation === 'decrement') {
-      handleAddToCart('decrement');
-      if (quantity > 0) {
-        setQuantity(quantity - 1);
-      }
-      if(quantity === 1){
+      if (quantity === 1) {
+        // If quantity is 1 and decrement is clicked, remove the product from the cart
         setQuantity(0);
         setShowQuantitySelector(false);
+        dispatch({
+          type: 'REMOVE_FROM_CART',
+          payload: {
+            id: existingProduct.id,
+          },
+        });
+        handleAddToCart('decrement');
+      } else if (quantity > 1) {
+        setQuantity(quantity - 1);
+        handleAddToCart('decrement');
       }
     }
   };
+  
   
 
   const handleQuantityButtonClick = () => {
@@ -32,6 +69,12 @@ const Product = ({ name, originalPrice, discountedPrice, image, weight, addToCar
       // If quantity selector is visible, reset quantity to zero and switch to add button
       handleAddToCart(quantity);
       setQuantity(0);
+      dispatch({
+        type: 'REMOVE_FROM_CART',
+        payload: {
+          id: existingProduct.id,
+        },
+      });
       setShowQuantitySelector(false);
     }
     else {
@@ -65,14 +108,14 @@ const Product = ({ name, originalPrice, discountedPrice, image, weight, addToCar
               ) : (
                 <div className={styles.quantitySelector}>
                   <button className={styles.minus} onClick={() => handleQuantityChange('decrement')}>-</button>
-                  <button className={styles.qty} onClick={handleQuantityButtonClick}>{quantity}</button>
+                  <button className={styles.qty} onClick={handleQuantityButtonClick}>{existingProduct.quantity}</button>
                   <button className={styles.plus} onClick={() => handleQuantityChange('increment')}>+</button>
                 </div>
               )}
             </div>
           </div>
           {showQuantitySelector && (
-            <p className={styles.totalPrice}>Total Price: ₹{discountedPrice * quantity}</p>
+            <p className={styles.totalPrice}>Total Price: ₹{discountedPrice * existingProduct.quantity}</p>
           )}
         </div>
       </div>

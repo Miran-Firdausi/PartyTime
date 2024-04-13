@@ -5,7 +5,7 @@ import Product from './ProductItem';
 import styles from "@/styles/productsList.module.css"
 
 
-  export default function ProductsList({ products, category = "Chips, Biscuits and Cold Drinks",addToCart }) {
+  export default function ProductsList({ products, category = "Chips, Biscuits and Cold Drinks" }) {
     const productsListRef = useRef(null);
 
      useEffect(() => {
@@ -59,7 +59,6 @@ import styles from "@/styles/productsList.module.css"
               discountedPrice={product.discountedPrice}
               image={product.image}
               weight={product.weight}
-              addToCart={addToCart} 
             />
           ))}
         </div>

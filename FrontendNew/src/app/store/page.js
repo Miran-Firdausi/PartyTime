@@ -1,8 +1,7 @@
 "use client"
-import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import ProductsList from "@/components/product/ProductsList";
-
+import { useCart } from '@/contextapi/CartContext';
 
 const snacks = [
     {
@@ -131,30 +130,16 @@ const snacks = [
   ];
 
 export default function Store(){
-    const [totalQuantity, setTotalQuantity] = useState(0);
-    const [totalPrice, setTotalPrice] = useState(0);
-
-    const addToCart = (quantity, price, added) => {
-        if(added==='increment') {
-            setTotalQuantity(prevQuantity => prevQuantity + quantity);
-            setTotalPrice(prevPrice => prevPrice + price);
-        }
-        else if (added==='decrement') {
-            setTotalQuantity(prevQuantity => prevQuantity - quantity);
-            setTotalPrice(prevPrice => prevPrice - price);
-        }
-        else {
-            setTotalQuantity(prevQuantity => prevQuantity - added);
-            setTotalPrice(prevPrice => prevPrice - added*price);
-        }
-    };
+  const { cart } = useCart();
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cart.reduce((total, item) => total + (item.discountedPrice * item.quantity), 0);
     
     return (
         <div className="Store">
             <Navbar  totalQuantity={totalQuantity} totalPrice={totalPrice} on={true}/>
             <div className="Advertising">Advertising</div>
-            <ProductsList products={snacks} category="Snacks & Munchies" addToCart={addToCart}/>
-            <ProductsList products={beverages} category="Beverages" addToCart={addToCart}/>
+            <ProductsList products={snacks} category="Snacks & Munchies"/>
+            <ProductsList products={beverages} category="Beverages"/>
         </div>
     )
 }

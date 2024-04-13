@@ -136,6 +136,13 @@
   border-bottom-right-radius: 5px;
 }
 
+.plus:hover {
+  border-right: 1px solid grey;
+}
+.minus:hover {
+  border-left: 1px solid grey;
+}
+
 .totalPrice {
   margin-top: 5px;
   color: rgb(35, 34, 34);

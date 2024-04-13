@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Mouse+Memoirs&display=swap');
+
 .heroContainer {
   height: calc(100vh - 71px);
   display: flex;
@@ -5,10 +7,12 @@
   align-items: center;
   background-color: #f5f5f5; /* sophisticated background color */
   flex-wrap: wrap;
+  z-index: 0;
+  position: relative;
 }
 
 .heroContent {
-  font-family: "Roboto", sans-serif;
+  font-family: "Mouse Memoirs", sans-serif;
   font-weight: 400;
   font-style: normal;
   display: flex;
@@ -16,6 +20,8 @@
   justify-content: space-between;
   max-width: 100dvw;
   width: 90%;
+  color: rgb(22, 22, 22);
+  
 }
 
 .heroContent > div {
@@ -24,13 +30,15 @@
 }
 
 .heroContent > div > h1{
-  font-size: 75px;
+  font-size: 110px;
   font-weight: 400;
   margin-bottom: 10px;
 }
 
 .heroContent > div > p{
-  font-size: 20px;
+  font-family: 'Roboto';
+  font-weight: 400;
+  font-size: 25px;
   margin-bottom: 20px;
 }
 
