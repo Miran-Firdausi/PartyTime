@@ -1,16 +1,22 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import styles from '@/styles/product.module.css'; // Import CSS module for styling
+import styles from '@/styles/product/product.module.css'; // Import CSS module for styling
 import { useCart } from '@/contextapi/CartContext';
 import { v4 as uuidv4 } from 'uuid';
+import { useRouter } from 'next/navigation';
 
-const Product = ({ name, originalPrice, discountedPrice, image, weight }) => {
+const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) => {
+  const router = useRouter();
   const { cart, dispatch } = useCart();
   const existingProduct = cart.find(item => item.name === name);
   const [quantity, setQuantity] = useState(existingProduct ? existingProduct.quantity : 0);
   const [showQuantitySelector, setShowQuantitySelector] = useState(existingProduct ? true : false);
   
-  
+  const handleProductClick = () => {
+    // Programmatically navigate to the product detail page
+    router.push(`/store/${encodeURIComponent(id)}`);
+  };
+
   const handleAddToCart = (isAdded) => {
       if (existingProduct) {
         // If the product already exists in the cart, update its quantity
@@ -26,7 +32,7 @@ const Product = ({ name, originalPrice, discountedPrice, image, weight }) => {
         dispatch({
           type: 'ADD_TO_CART',
           payload: {
-            id: uuidv4(),
+            id,
             name,
             originalPrice,
             discountedPrice,
@@ -86,9 +92,10 @@ const Product = ({ name, originalPrice, discountedPrice, image, weight }) => {
   };
 
   return (
+    
     <div className={styles.productList}>
       <div className={styles.product}>
-        <img className={styles.productImage} src={image} alt={name} />
+        <img className={styles.productImage} src={image} alt={name} onClick={handleProductClick}/>
         <div className={styles.info}>
           <div className={styles.distance}>
             <span>200m</span>

@@ -2,7 +2,7 @@
 "use client"
 import React, { useRef } from 'react';
 import Product from '@/components/seller/SellerProductItem';
-import styles from "@/styles/productsList.module.css";
+import styles from "@/styles/product/productsList.module.css";
 
 const SellerProductsList = ({ category, products = [], setProducts }) => {
     const productsListRef = useRef(null);

@@ -1,6 +1,6 @@
 // components/CartSummary.js
 import React from 'react';
-import styles from '@/styles/CartSummary.module.css';
+import styles from '@/styles/cart/CartSummary.module.css';
 
 const CartSummary = ({ totalPrice, onProceedToBuy }) => {
   return (

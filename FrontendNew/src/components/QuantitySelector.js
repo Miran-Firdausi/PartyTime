@@ -1,12 +1,11 @@
 import React from 'react';
-import styles from '@/styles/quantityselector.module.css'; // Import CSS module for styling
 
-const QuantitySelector = ({ quantity, onDecrement, onIncrement, onClick }) => {
+const QuantitySelector = ({ qtystyles, quantity, onDecrement, onIncrement, onClick }) => {
   return (
-    <div className={styles.quantitySelector}>
-      <button className={styles.minus} onClick={onDecrement}>-</button>
-      <button className={styles.qty} onClick={onClick}>{quantity}</button>
-      <button className={styles.plus} onClick={onIncrement}>+</button>
+    <div className={qtystyles.quantitySelector}>
+      <button className={qtystyles.minus} onClick={onDecrement}>-</button>
+      <button className={qtystyles.qty} onClick={onClick}>{quantity}</button>
+      <button className={qtystyles.plus} onClick={onIncrement}>+</button>
     </div>
   );
 };

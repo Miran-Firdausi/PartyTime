@@ -2,10 +2,9 @@
 'use client'
 import React from 'react';
 import CartItem from '@/components/cart/CartItem';
-import styles from '@/styles/cart.module.css';
+import styles from '@/styles/cart/cart.module.css';
 import Navbar from '@/components/Navbar';
 import { useCart } from '@/contextapi/CartContext';
-
 
 const Cart = () => {
   const { cart } = useCart();

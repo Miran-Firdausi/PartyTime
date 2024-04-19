@@ -1,12 +1,19 @@
 'use client'
 import React , {useState} from 'react';
-import styles from '@/styles/CartItem.module.css';
+import styles from '@/styles/cart/CartItem.module.css';
 import { useCart } from '@/contextapi/CartContext'; // Update the path to your CartContext
 import QuantitySelector from '../QuantitySelector';
+import qtystyles from '@/styles/quantityselector.module.css'; // Import CSS module for styling
+import { useRouter } from 'next/navigation';
 
 const CartItem = ({ product }) => {
   const { dispatch } = useCart(); // Access the dispatch function from the context
   const [quantity, setQuantity] = useState(product ? product.quantity : 0);
+  const router = useRouter();
+  const handleProductClick = () => {
+    // Programmatically navigate to the product detail page
+    router.push(`/store/${encodeURIComponent(product.id)}`);
+  };
 
   const handleRemove = () => {
     dispatch({
@@ -70,7 +77,7 @@ const CartItem = ({ product }) => {
   return (
     <div className={styles.cartItem}>
       <div className={styles.productImage}>
-        <img src={product.image} alt={product.name} />
+        <img src={product.image} alt={product.name} onClick={handleProductClick}/>
       </div>
       <div className={styles.itemDetails}>
         <h3 className={styles.productName}>{product.name}</h3>
@@ -80,7 +87,7 @@ const CartItem = ({ product }) => {
         </div>
         <p className={styles.productDescription}>{product.description}</p>
         <div className={styles.quantityContainer}>
-          <label htmlFor="quantity">Quantity: <QuantitySelector quantity={product.quantity} onDecrement={()=> handleQuantityChange('decrement')} onIncrement={()=> handleQuantityChange('increment')}/></label>
+          <label htmlFor="quantity">Quantity: <QuantitySelector qtystyles={qtystyles} quantity={product.quantity} onDecrement={()=> handleQuantityChange('decrement')} onIncrement={()=> handleQuantityChange('increment')}/></label>
         </div>
         <button className={styles.removeButton} onClick={handleRemove}>Remove</button>
       </div>

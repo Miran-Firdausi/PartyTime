@@ -2,7 +2,7 @@
 "use client"
 import { useRef,useEffect } from 'react';
 import Product from './ProductItem';
-import styles from "@/styles/productsList.module.css"
+import styles from "@/styles/product/productsList.module.css"
 
 
   export default function ProductsList({ products, category = "Chips, Biscuits and Cold Drinks" }) {
@@ -54,6 +54,7 @@ import styles from "@/styles/productsList.module.css"
           {products.map((product, index) => (
             <Product
               key={index}
+              id={product.id}
               name={product.name}
               originalPrice={product.originalPrice}
               discountedPrice={product.discountedPrice}

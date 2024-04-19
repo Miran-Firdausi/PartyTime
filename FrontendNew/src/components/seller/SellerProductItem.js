@@ -1,7 +1,7 @@
 // SellerProductItem.js
 "use client"
 import React from 'react';
-import styles from '@/styles/product.module.css'; // Import CSS module for styling
+import styles from '@/styles/product/product.module.css'; // Import CSS module for styling
 
 const Product = ({ id, name, originalPrice, discountedPrice, image, weight, quantity, onDelete }) => {
   

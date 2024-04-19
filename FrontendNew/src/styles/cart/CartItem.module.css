@@ -4,7 +4,7 @@
   height: 200px;
   background-color: white;
   padding: 20px;
-border-radius: 10px;
+  border-radius: 10px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
   transition: box-shadow 0.3s, transform 0.3s;
   align-items: flex-start;
@@ -15,6 +15,9 @@ border-radius: 10px;
   width: 150px;
   margin-right: 40px;
   text-align: center;
+}
+.productImage:hover {
+  cursor: pointer;
 }
 .productImage img{
   height: 100%;

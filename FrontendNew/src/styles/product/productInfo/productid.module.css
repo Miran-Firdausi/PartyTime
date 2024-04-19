@@ -1,0 +1,12 @@
+.product-details-container {
+    display: flex;
+  }
+  
+  .product-info {
+    flex: 75%; /* Take up 70% of the width */
+  }
+  
+  .shop-list {
+    flex: 25%; /* Take up 30% of the width */
+  }
+  
