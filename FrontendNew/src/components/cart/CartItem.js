@@ -39,7 +39,7 @@ const CartItem = ({ product }) => {
         dispatch({
           type: 'ADD_TO_CART',
           payload: {
-            id: uuidv4(),
+            id,
             name,
             originalPrice,
             discountedPrice,

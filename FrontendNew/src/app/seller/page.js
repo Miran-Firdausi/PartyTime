@@ -1,8 +1,7 @@
 // Seller.js
 "use client"
 // Seller.js
-import React, { useState } from 'react';
-import Navbar from '@/components/Navbar';
+import React, { useState } from 'react';;
 import SellerProductsList from '@/components/seller/SellerProductsList';
 import styles from '@/styles/seller.module.css';
 import ProductForm from '@/components/seller/ProductForm';

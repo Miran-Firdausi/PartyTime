@@ -1,5 +1,4 @@
 "use client"
-import Navbar from "@/components/Navbar";
 import ProductsList from "@/components/product/ProductsList";
 import { useCart } from '@/contextapi/CartContext';
 
@@ -202,7 +201,6 @@ export default function Store(){
     
     return (
         <div className="Store">
-            <Navbar  totalQuantity={totalQuantity} totalPrice={totalPrice} on={true}/>
             <div className="Advertising">Advertising</div>
             {categories.map(category => (
             <ProductsList key={category} products={products.filter(product => product.category === category)} category={category} />

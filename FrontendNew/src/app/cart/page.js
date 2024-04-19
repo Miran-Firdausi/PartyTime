@@ -3,7 +3,6 @@
 import React from 'react';
 import CartItem from '@/components/cart/CartItem';
 import styles from '@/styles/cart/cart.module.css';
-import Navbar from '@/components/Navbar';
 import { useCart } from '@/contextapi/CartContext';
 
 const Cart = () => {
@@ -13,7 +12,6 @@ const Cart = () => {
 
   return (
     <div>
-      <Navbar totalQuantity={totalQuantity} totalPrice={totalPrice} on={true}/>
       {cart.length === 0 ? (
           <div className={styles.emptyCartMessage}>
             <img src="/images/empty-cart.png" alt="Empty-Cart!" className={styles.emptyCartImage} />

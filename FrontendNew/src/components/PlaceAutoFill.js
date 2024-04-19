@@ -12,7 +12,7 @@ export default function AutoPlaceFill({ onSelectAddress }) {
     const fetchSuggestions = async () => {
       if (inputText.trim() !== '') {
         try {
-          const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputText)}&apiKey=${process.env.geoApifyKey}`);
+          const response = await fetch(`https://api.geoapify.com/v1/geocode/autocomplete?text=${encodeURIComponent(inputText)}&apiKey=${process.env.NEXT_PUBLIC_geoApifyKey}`);
           const data = await response.json();
           if (data.features) {
             setSuggestions(data.features.map(feature => feature.properties.formatted));

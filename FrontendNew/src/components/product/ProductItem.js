@@ -2,13 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import styles from '@/styles/product/product.module.css'; // Import CSS module for styling
 import { useCart } from '@/contextapi/CartContext';
-import { v4 as uuidv4 } from 'uuid';
 import { useRouter } from 'next/navigation';
 
 const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) => {
   const router = useRouter();
   const { cart, dispatch } = useCart();
-  const existingProduct = cart.find(item => item.name === name);
+  const existingProduct = cart.find(item => item.id === id);
   const [quantity, setQuantity] = useState(existingProduct ? existingProduct.quantity : 0);
   const [showQuantitySelector, setShowQuantitySelector] = useState(existingProduct ? true : false);
   
