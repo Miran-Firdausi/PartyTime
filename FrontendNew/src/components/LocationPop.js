@@ -12,7 +12,7 @@ export default function LocationPop({ latitude, longitude }) {
           method: 'GET',
         };
 
-        const apiUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=b0740c28ed1f433bbd2a70f6d3deb561`;
+        const apiUrl = `https://api.geoapify.com/v1/geocode/reverse?lat=${latitude}&lon=${longitude}&apiKey=${process.env.locationApiKey}`;
         const response = await fetch(apiUrl, requestOptions);
         const data = await response.json();
         setCurrentAddress(
