@@ -4,6 +4,7 @@
     flex-direction: column;
     gap: 5px;
     padding: 20px 10px;
+    height: calc(100dvh - 91px);
   }
   
   .title {
@@ -11,6 +12,10 @@
     font-weight: bold;
     color: #333;
     margin-bottom: 10px;
+  }
+  
+  .List {
+    overflow: scroll;
   }
   
   /* Adjustments for ShopItem can be added here */
