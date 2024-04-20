@@ -34,6 +34,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+AUTH_USER_MODEL= 'core.Seller'
+
+
 
 # Application definition
 
@@ -47,7 +50,8 @@ INSTALLED_APPS = [
     'rest_framework',
      'corsheaders',
     'store',
-    'core'
+    'core',
+    'orders'
 ]
 
 MIDDLEWARE = [

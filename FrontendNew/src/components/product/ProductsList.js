@@ -1,14 +1,13 @@
 
 "use client"
-import { useRef,useEffect } from 'react';
+import { useRef,useEffect, useState } from 'react';
 import Product from './ProductItem';
 import styles from "@/styles/productsList.module.css"
 
 
 
 
-
-const products = [
+/*const products = [
     {
       name: "Lays Classic Family Size",
       originalPrice: 30,
@@ -289,9 +288,11 @@ const products = [
       image: '/images/product/cold5.png',
       weight: "200g"
     }
-  ];
+  ];*/
+
 
   export default function ProductsList({ category = "Chips, Biscuits and Cold Drinks",addToCart }) {
+    const [products, setProducts] = useState([]); // State to hold products
     const productsListRef = useRef(null);
 
      useEffect(() => {
@@ -299,8 +300,9 @@ const products = [
       try {
         const response = await fetch('http://127.0.0.1:8000/getProducts/');
         const data = await response.json();
-        //setProducts(data);
         console.log(data);
+        setProducts(data);
+
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -310,7 +312,7 @@ const products = [
   }, []);
 
 
-  
+
     const handleScrollLeft = () => {
       if (productsListRef.current) {
         productsListRef.current.scrollBy({
@@ -319,7 +321,7 @@ const products = [
         });
       }
     };
-  
+
     const handleScrollRight = () => {
       if (productsListRef.current) {
         productsListRef.current.scrollBy({
@@ -328,7 +330,7 @@ const products = [
         });
       }
     };
-  
+
     return (
       <div className={styles.productsListOuterContainer}>
       <span className={styles.productsListTitle}>{category}</span>
@@ -345,7 +347,7 @@ const products = [
               discountedPrice={product.discountedPrice}
               image={product.image}
               weight={product.weight}
-              addToCart={addToCart} 
+              addToCart={addToCart}
             />
           ))}
         </div>

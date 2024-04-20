@@ -1,29 +1,26 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import SellerProductsList from '@/components/seller/SellerProductsList';
 import styles from '@/styles/seller.module.css';
-import ProductForm from '@/components/seller/ProductForm'; 
+import ProductForm from '@/components/seller/ProductForm';
 
 const Seller = ({ seller = "SellerLoginName" }) => {
-    const [products, setProducts] = useState([
-        {
-            name: "Lays Classic Family Size",
-            originalPrice: 30,
-            discountedPrice: 25,
-            image: '/images/product/Lays.png',
-            weight: "200g",
-            quantity: 5
-        },
-        {
-            name: "Cheetos Firindan",
-            originalPrice: 35,
-            discountedPrice: 33,
-            image: '/images/product/Cheetos.png',
-            weight: "200g",
-            quantity: 5
+    const [products, setProducts] = useState([]);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await fetch('http://127.0.0.1:8000/getProducts/');
+                const data = await response.json();
+                console.log(data);
+                setProducts(data);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
         }
-    ]);
+        fetchData();
+    }, []);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -58,10 +55,28 @@ const Seller = ({ seller = "SellerLoginName" }) => {
         }
     };
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+        const response = await fetch('http://127.0.0.1:8000/api/add-product/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to add product');
+        }
+
+        // Assuming your backend returns the added product as response data
+        const addedProduct = await response.json();
+
         // Add the new product to the products array
-        setProducts(prevProducts => [...prevProducts, formData]);
+        setProducts(prevProducts => [...prevProducts, addedProduct]);
+
         // Clear the form fields
         setFormData({
             name: '',
@@ -71,23 +86,26 @@ const Seller = ({ seller = "SellerLoginName" }) => {
             weight: '',
             quantity: ''
         });
+
         // Hide the form after submission
         setShowForm(false);
-    };
+    } catch (error) {
+        console.error('Error adding product:', error);
+    }
+};
+
 
 
     const totalSales = 2060;
     const averageRating = 4.5;
 
-
-
     return (
         <div className={styles.main}>
             <h2 className={styles.marginMe}>Hello {seller}, </h2>
 
-            <div>  
-                <h1 className={styles.marginMe}>Analytics</h1>  
-                <div className={styles.analytics}> 
+            <div>
+                <h1 className={styles.marginMe}>Analytics</h1>
+                <div className={styles.analytics}>
                     <div className={styles.graph}>
                         <img src='/images/graph.png'/>
                     </div>
@@ -96,34 +114,30 @@ const Seller = ({ seller = "SellerLoginName" }) => {
                             <h3>Total Sales</h3>
                             <p>₹{totalSales}</p>
                         </div>
-
                         <div>
-                        <h3>Average Rating</h3>
-                        <p>{averageRating}</p>
+                            <h3>Average Rating</h3>
+                            <p>{averageRating}</p>
                         </div>
                     </div>
                 </div>
             </div>
-                <div>
-                    <div className={styles.productTitle}>
-                        <h1>Products</h1>
-                        <button className={styles.sellerProductAdd} onClick={() => setShowForm(true)}> Add </button>
-                        {showForm && (
-                            <ProductForm
-                                formData={formData}
-                                handleInputChange={handleInputChange}
-                                handleImageUpload={handleImageUpload}
-                                handleSubmit={handleSubmit}
-                                setShowForm={setShowForm}
-                            />
-                        )}
-                    </div>
-
-                    <SellerProductsList category='Your Products' products={products} setProducts={setProducts} />
+            <div>
+                <div className={styles.productTitle}>
+                    <h1>Products</h1>
+                    <button className={styles.sellerProductAdd} onClick={() => setShowForm(true)}> Add </button>
+                    {showForm && (
+                        <ProductForm
+                            formData={formData}
+                            handleInputChange={handleInputChange}
+                            handleImageUpload={handleImageUpload}
+                            handleSubmit={handleSubmit}
+                            setShowForm={setShowForm}
+                        />
+                    )}
+                </div>
+                <SellerProductsList category='Your Products' products={products} setProducts={setProducts} />
             </div>
         </div>
-
-
     );
 }
 

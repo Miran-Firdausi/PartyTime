@@ -1,4 +1,3 @@
-// ProductForm.js
 import React from 'react';
 import styles from '@/styles/seller.module.css';
 
@@ -9,7 +8,7 @@ const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSub
                 <p>NEW PRODUCT</p>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <div>
-                        Name 
+                        Name
                         <input type="text" name="name" value={formData.name} onChange={handleInputChange} placeholder="Product Name" required />
                     </div>
                     <div>
@@ -22,7 +21,7 @@ const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSub
                     </div>
                     <div>
                         <div className={styles.imgText}>Image</div>
-                        <input type="file" accept="image/png" name="image" onChange={handleImageUpload} required />
+                        <input type="file" accept="image/png" name="image" onChange={handleImageUpload}/>
                     </div>
                     <div>
                         Weight
@@ -34,7 +33,7 @@ const ProductForm = ({ formData, handleInputChange, handleImageUpload, handleSub
                     </div>
                     <div className={styles.buttons}>
                         <button className={styles.closeButton} onClick={() => setShowForm(false)}>Close</button>
-                        <button className={styles.addButton} type="submit">Add</button>
+                        <button className={styles.addButton} type="submit" onClick={()=> handleSubmit}>Add</button>
                     </div>
                 </form>
             </div>
