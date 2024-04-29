@@ -13,6 +13,8 @@ class User(AbstractUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
+    is_seller = models.BooleanField(default=False)
+    is_customer = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'phone', 'password']
@@ -32,14 +34,18 @@ class Customer(models.Model):
 class Seller(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
+    objects = SellerManager()
+
     aadhar_number = models.CharField(max_length=12, unique=True)
-    license_number = models.CharField(max_length=12, unique=True)
+    license_number = models.CharField(max_length=20, unique=True)
+    seller_upi = models.CharField(max_length=255, null=True)
+
+
+class Shop(models.Model):
+    owner = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
 
 
 # class Admin(AbstractUser):
-#     first_name = models.CharField(max_length=30)
-#     last_name = models.CharField(max_length=30)
-#     email = models.EmailField(max_length=255, unique=True)
 #
 #     # objects = SellerManager()
 #

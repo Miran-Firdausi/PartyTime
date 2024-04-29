@@ -2,7 +2,7 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rest_framework import serializers
 
-from .models import Customer, Seller, User
+from .models import Customer, Seller, User, Shop
 
 
 class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
@@ -16,11 +16,13 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField()
     password = serializers.CharField(write_only=True)
 
     class Meta:
         model = User
-        fields = ['email', 'phone', 'password', 'first_name', 'last_name']
+        fields = ['id', 'email', 'phone', 'password', 'first_name', 'last_name']
+        extra_kwargs = {'first_name': {'required': True}, 'last_name': {'required': True}}
 
 
 class CustomerSerializer(serializers.ModelSerializer):
@@ -34,6 +36,22 @@ class CustomerSerializer(serializers.ModelSerializer):
     class Meta:
         model = Customer
         fields = ['id', 'user']
+
+
+class SellerSerializer(ModelSerializer):
+    user = UserSerializer()
+
+    class Meta:
+        model = Seller
+        fields = ['id', 'user', 'aadhar_number', 'license_number', 'seller_upi']
+
+
+class ShopSerializer(serializers.ModelSerializer):
+    owner = SellerSerializer(read_only=True)
+
+    class Meta:
+        model = Shop
+        fields = ['id', 'owner']
 
 
 # class RegisterSerializer(ModelSerializer):
@@ -76,7 +94,4 @@ class CustomerSerializer(serializers.ModelSerializer):
 #         fields = '__all__'
 
 
-class SellerSerializer(ModelSerializer):
-    class Meta:
-        model = Seller
-        fields = '__all__'
+
