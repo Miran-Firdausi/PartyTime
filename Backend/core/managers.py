@@ -32,7 +32,11 @@ class UserManager(BaseUserManager):
         if extra_fields.get('is_superuser') is not True:
             raise ValueError('Superuser must have is_superuser=True.')
 
-        return self.create_user(email, password, **extra_fields)
+        first_name = extra_fields.pop('first_name', '')
+        last_name = extra_fields.pop('last_name', '')
+        phone = extra_fields.pop('phone', '')
+
+        return self.create_user(email, first_name, last_name, password, phone, **extra_fields)
 
 
 class CustomerManager(BaseUserManager):

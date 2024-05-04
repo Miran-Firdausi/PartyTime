@@ -51,8 +51,9 @@ def seller_register(request):
     if request.method == 'POST':
         user_serializer = UserSerializer(data=request.data)
         seller_serializer = SellerSerializer(data=request.data)
-        aadhar_number = request.data.get('aadhar_number')
-        license_number = request.data.get('license_number')
+        aadhar_number = request.data.pop('aadhar_number')
+        license_number = request.data.pop('license_number')
+        seller_upi = request.data.pop('seller_upi')
 
         email = request.data.get('email')
         existing_user = User.objects.filter(email=email).first()
