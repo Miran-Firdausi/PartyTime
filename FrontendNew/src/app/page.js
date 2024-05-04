@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 
 
@@ -11,7 +10,6 @@ export const metadata = {
 export default function Home() {
   return (
     <div>
-        <Navbar />
         <Hero />
     </div>
   )

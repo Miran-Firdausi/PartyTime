@@ -30,7 +30,7 @@ def add_to_cart(request):
         cart, _ = Cart.objects.get_or_create(customer=customer)
         cart.total_amount = request.data.get('total_amount')
         cart.total_items = request.data.get('total_items')
-
+        cart.save()
         for item in items:
             product_id = item.get('product').get('id')
             product = get_object_or_404(Product, id=product_id)
@@ -43,7 +43,7 @@ def add_to_cart(request):
 
             if not created:
                 cart_item.product_quantity = product_quantity
-                cart_item.save()
+            cart_item.save()
 
         serializer = CartSerializer(cart)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -84,7 +84,7 @@ def make_order(request):
 
         # Clear the cart
         cart.cart_items.all().delete()
-        cart.total_price = 0
+        cart.total_amount = 0
         cart.total_items = 0
         cart.save()
 

@@ -5,12 +5,17 @@ import styles from '@/styles/navbar.module.css';
 import Link from 'next/link';
 import AutoPlaceFill from './PlaceAutoFill';
 import LocationPop from './LocationPop';
+import { useCart } from '@/contextapi/CartContext';
+
 
 const Navbar = (props) => {
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState('');
   const [latitude, setLatitude] = useState(); // Default latitude
   const [longitude, setLongitude] = useState(); // Default longitude
+  const { cart } = useCart();
+  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
+  const totalPrice = cart.reduce((total, item) => total + (item.discountedPrice * item.quantity), 0);
 
   function toggleLocationMenu() {
     setIsLocationMenuOpen((prevState) => !prevState);
@@ -87,14 +92,14 @@ const Navbar = (props) => {
         {props.on && (
           <Link className={styles.cart} href="/cart">
             <img className={styles.cartImage} src="/icons/icons8-cart-96.png" alt="Cart" />
-            {props.totalQuantity === 0 || props.totalPrice === 0 ? (
+            {totalQuantity === 0 || totalPrice === 0 ? (
               <>
                 <span>My Cart</span>
               </>
             ) : (
               <div className={styles.qty}>
-                <div>{props.totalQuantity} Items</div>
-                <div>₹{props.totalPrice}</div>
+                <div>{totalQuantity} Items</div>
+                <div>₹{totalPrice}</div>
               </div>
             )}
           </Link>

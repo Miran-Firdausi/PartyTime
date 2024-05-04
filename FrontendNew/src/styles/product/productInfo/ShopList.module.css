@@ -3,15 +3,20 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-    padding: 20px 10px;
+    padding: 10px 10px 0px 10px;
+    height: 440px;
   }
   
   .title {
     font-size: 24px;
     font-weight: bold;
     color: #333;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
+.List {
+    overflow-y: auto;
+}
+
   /* Adjustments for ShopItem can be added here */
   

@@ -11,10 +11,10 @@ const Login = () => {
           <h2>Become a Seller on</h2>
           <h1>PartyTime</h1>
           <p className={styles.attractiveQuote}>"Unlock Your Potential with PartyTime"</p>
-          <Link href="/login/seller" passHref>
+          <Link href="/login/seller/registration" passHref>
             <button className={styles.startSellingButton}>Start Selling</button>
           </Link>
-          <Link href="/login/seller" passHref>
+          <Link href="/login/seller/login" passHref>
             <button className={styles.loginButton}>Login</button>
           </Link>
           <p className={styles.termsAndConditions}>* Terms & Conditions Apply</p>
@@ -26,10 +26,10 @@ const Login = () => {
         <div className={styles.heroContent}>
           <h2>Discover Your Perfect Party Experience</h2>
           <p className={styles.provokingMessage}>"Discover unique products and exclusive deals only on PartyTime!"</p>
-          <Link href="/login/customer" passHref>
+          <Link href="/login/customer/registration" passHref>
             <button className={styles.registerButton}>Register</button>
           </Link>
-          <Link href="/login/customer" passHref>
+          <Link href="/login/customer/login" passHref>
             <button className={styles.loginButton}>Login</button>
           </Link>
         </div>
