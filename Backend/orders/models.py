@@ -8,7 +8,10 @@ class Cart(models.Model):
     items_in_cart = models.ManyToManyField(Product, through='CartItem')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_items = models.PositiveIntegerField(default=0)
-
+    
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        
     def __str__(self):
         return f"Cart ID: {self.cart_id}, Customer: {self.customer.user.first_name}, Total Price: {self.total_amount}, Total Items: {self.total_items}"
 
@@ -27,7 +30,7 @@ class CartItem(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        self.cart.total_price -= self.subtotal()
+        self.cart.total_amount -= self.subtotal()
         self.cart.total_items -= self.quantity_buying
         self.cart.save()
         super().delete(*args, **kwargs)

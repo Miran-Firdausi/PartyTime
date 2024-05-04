@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react';
+import React, { createContext, useContext, useReducer, useEffect } from 'react';
 
 // Step 1: Create a context for the cart
 const CartContext = createContext();
@@ -29,6 +29,50 @@ export const useCart = () => {
 
 export const CartProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
+
+  // Step 5: Use useEffect to watch for changes in the cart and post data
+  useEffect(() => {
+    
+    const postData = async () => {
+      try {
+        const formattedCart = cart.map(item => ({
+          product: {
+            id: item.id
+          },
+          quantity: item.quantity
+        }));
+
+        const totalAmount = cart.reduce((total, item) => total + (item.quantity * item.discountedPrice), 0);
+        const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+        console.log(totalAmount);
+        console.log(totalItems);
+        const data = {
+          items: formattedCart,
+          total_amount: totalAmount,
+          total_items: totalItems
+        };
+        console.log(JSON.stringify(data));
+        const accessToken = localStorage.getItem('accessToken');
+        const response = await fetch('http://127.0.0.1:8000/cart/add/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${accessToken}`,
+          },
+          body: JSON.stringify(data),
+          credentials: 'include' // Include credentials in the request
+        });
+        if (!response.ok) {
+          throw new Error('Failed to post cart data');
+        }
+      } catch (error) {
+        console.error('Error posting cart data:', error);
+      }
+    };
+
+    postData();
+  }, [cart]); // Watch for changes in the cart
+
   return (
     <CartContext.Provider value={{ cart, dispatch }}>
       {children}

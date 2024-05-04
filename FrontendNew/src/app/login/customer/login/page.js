@@ -6,6 +6,7 @@ const CustomerLogin = () => {
     email: '',
     password: ''
   });
+  const [loginSuccess, setLoginSuccess] = useState(false); // State variable to track login success
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -18,7 +19,7 @@ const CustomerLogin = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://127.0.0.1:8000/login/', {
+      const response = await fetch('http://127.0.0.1:8000/api/token/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,6 +28,15 @@ const CustomerLogin = () => {
       });
       const data = await response.json();
       console.log(data); // Assuming the backend returns some data
+
+      // Assuming successful login, store tokens in local storage
+      localStorage.setItem('accessToken', data.access);
+      localStorage.setItem('refreshToken', data.refresh);
+
+      // Set login success state to true
+      setLoginSuccess(true);
+
+      // Redirect or perform any other action after successful login
     } catch (error) {
       console.error('Error submitting form:', error);
     }
@@ -58,6 +68,7 @@ const CustomerLogin = () => {
         </div>
         <button type="submit">Login</button>
       </form>
+      {loginSuccess && <p>Login successful!</p>} {/* Conditional rendering for success message */}
     </div>
   );
 };

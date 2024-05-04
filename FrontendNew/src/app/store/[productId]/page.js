@@ -6,7 +6,23 @@ import styles from '@/styles/product/productInfo/productid.module.css'; // Impor
 
 export default function ProductDetails({ params }) {
   const { productId } = params;
+  const [products, setProducts] = useState([]);
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:8000/products/');
+        if (!response.ok) {
+          throw new Error('Failed to fetch products');
+        }
+        const data = await response.json();
+        setProducts(data);
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      }
+    };
 
+    fetchProducts();
+  }, []);
   const findProductById = (id) => {
     const product = products.find((product) => product.id === parseInt(id));
     if (product) {
