@@ -15,14 +15,14 @@ class Cart(models.Model):
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity_buying = models.PositiveIntegerField(default=1)
+    product_quantity = models.PositiveIntegerField()
 
     def subtotal(self):
-        return self.quantity_buying * self.product.discountedPrice
+        if self.product_quantity is None:
+            return 0
+        return self.product_quantity * self.product.discountedPrice
 
     def save(self, *args, **kwargs):
-        self.cart.total_price += self.subtotal()
-        self.cart.total_items += self.quantity_buying
         self.cart.save()
         super().save(*args, **kwargs)
 
@@ -33,7 +33,7 @@ class CartItem(models.Model):
         super().delete(*args, **kwargs)
 
     def __str__(self):
-        return f"Cart ID: {self.cart_id}, Product: {self.product.name}, Quantity Buying: {self.quantity_buying}, Subtotal: {self.subtotal()}"
+        return f"Cart ID: {self.cart_id}, Product: {self.product.name}, Total Quantity: {self.product_quantity}, Subtotal: {self.subtotal()}"
 
 
 

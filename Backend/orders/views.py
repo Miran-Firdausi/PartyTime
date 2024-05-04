@@ -24,22 +24,25 @@ def add_to_cart_view(request):
         user = request.user
         customer = get_object_or_404(Customer, user=user)
         items = request.data.get('items')
-        quantity = request.data.get('quantity', 1)  # Default quantity is 1
 
         # Retrieve or create cart for the user
         cart, _ = Cart.objects.get_or_create(customer=customer)
+        cart.total_price = request.data.get('total_price')
+        cart.total_items = request.data.get('total_items')
 
         for item in items:
             product_id = item.get('product').get('id')
             product = get_object_or_404(Product, id=product_id)
-            cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+            product_quantity = item.get('quantity')
+            cart_item, created = CartItem.objects.get_or_create(
+                cart=cart,
+                product=product,
+                defaults={'product_quantity': product_quantity}
+            )
 
-        if not created:
-            cart_item.quantity_buying += int(quantity)
-        else:
-            cart_item.quantity_buying = int(quantity)
-
-        cart_item.save()
+            if not created:
+                cart_item.product_quantity = product_quantity
+                cart_item.save()
 
         serializer = CartSerializer(cart)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
