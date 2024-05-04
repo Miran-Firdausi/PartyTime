@@ -4,12 +4,12 @@ from django.db import models
 from django.db import models
 #from  .serializers import ProductSerializer
 from datetime import datetime, date
-from django.utils import timezone
 from core.models import Seller
+import os
+from django.utils.timezone import now
 
-# Example default values:
-default_expiry_date = timezone.now().date()  # Set the default expiry date to the current date
-default_weight = 1.0  # Set the default weight to 1.0 (for example)
+
+default_weight = 1.0
 
 
 class Category(models.Model):
@@ -22,15 +22,22 @@ class Category(models.Model):
         return self.name
 
 
+def product_image_path(instance, filename):
+    # Construct the upload path for product images
+    ext = filename.split('.')[-1]  # Get the file extension
+    filename = f"{instance.name}_{now().strftime('%Y%m%d%H%M%S')}.{ext}"  # Rename the file with the product name and timestamp
+    return os.path.join('product_images', filename)
+
+
 class Product(models.Model):
     name = models.CharField(max_length=255, null=False)
     originalPrice = models.DecimalField(null=False, max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    product_image = models.ImageField(null=True)
-    expiry_image = models.ImageField(null=True)
+    product_image = models.ImageField(null=True, upload_to=product_image_path)
+    expiry_image = models.ImageField(null=True, upload_to=product_image_path)
     weight = models.DecimalField(null=True, max_digits=10, decimal_places=2)
     volume = models.DecimalField(null=True, max_digits=10, decimal_places=2)
-    expiry_date = models.DateField(null=False, default=date.today())
+    expiry_date = models.DateField(null=False)
     seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     discountedPrice = models.DecimalField(max_digits=10, decimal_places=2, null=True)
