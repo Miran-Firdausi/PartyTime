@@ -15,12 +15,13 @@ def index(request):
 
 
 #@api_view(['GET'])
-def getProducts(request):
+def get_products(request):
     products = Product.objects.all()  # Query all products
     serializer = ProductSerializer(products, many=True)  # Serialize the products
     return JsonResponse(serializer.data,safe=False)  # Ret
 
-@api_view(['POST'])
+
+@api_view(['POST', 'GET'])
 def add_product(request):
     if request.method == 'POST':
         serializer = ProductSerializer(data=request.data)
@@ -28,3 +29,7 @@ def add_product(request):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    else:
+        return Response()
+
+
