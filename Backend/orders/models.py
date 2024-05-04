@@ -1,0 +1,70 @@
+from django.db import models
+from store.models import Product
+from core.models import User, Customer, Seller
+
+class Cart(models.Model):
+    cart_id = models.AutoField(primary_key=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    items_in_cart = models.ManyToManyField(Product, through='CartItem')
+    total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    total_items = models.PositiveIntegerField(default=0)
+
+    def __str__(self):
+        return f"Cart ID: {self.cart_id}, Customer: {self.customer.user.first_name}, Total Price: {self.total_price}, Total Items: {self.total_items}"
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product_quantity = models.PositiveIntegerField()
+
+    def subtotal(self):
+        if self.product_quantity is None:
+            return 0
+        return self.product_quantity * self.product.discountedPrice
+
+    def save(self, *args, **kwargs):
+        self.cart.save()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        self.cart.total_price -= self.subtotal()
+        self.cart.total_items -= self.quantity_buying
+        self.cart.save()
+        super().delete(*args, **kwargs)
+
+    def __str__(self):
+        return f"Cart ID: {self.cart_id}, Product: {self.product.name}, Total Quantity: {self.product_quantity}, Subtotal: {self.subtotal()}"
+
+
+
+class Order(models.Model):
+    order_id = models.AutoField(primary_key=True)
+    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE)
+    order_total = models.DecimalField(max_digits=10, decimal_places=2)
+    items_in_order = models.ManyToManyField(Product, through='OrderItems')
+    transaction_id = models.CharField(max_length=255)
+    paid_to_upi = models.CharField(max_length=255, default='our upi')
+    transaction_amount = models.DecimalField(max_digits=10, decimal_places=2)
+    transaction_status = models.CharField(max_length=255)
+    transaction_timestamp = models.DateTimeField()
+    payment_gateway_response = models.TextField(null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Order ID: {self.order_id}, User ID: {self.user_id}, Seller ID: {self.seller_id}, Total: {self.order_total}, Status: {self.transaction_status}"
+
+class OrderItems(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    quantity_bought = models.PositiveIntegerField()
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def save(self, *args, **kwargs):
+        self.subtotal = self.quantity_bought * self.product.discounted_price
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"Order ID: {self.order_id}, Product: {self.product.name}, Quantity Bought: {self.quantity_bought}, Subtotal: {self.subtotal}"
+
