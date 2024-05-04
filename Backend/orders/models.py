@@ -1,28 +1,28 @@
 from django.db import models
 from store.models import Product
-from core.models import Customer, Seller
+from core.models import User, Customer, Seller
 
 class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey(Customer, on_delete=models.CASCADE)
-    items_in_cart = models.ManyToManyField(Product, through='CartItems')
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
+    items_in_cart = models.ManyToManyField(Product, through='CartItem')
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_items = models.PositiveIntegerField(default=0)
 
     def __str__(self):
-        return f"Cart ID: {self.cart_id}, User ID: {self.user_id}, Total Price: {self.total_price}, Total Items: {self.total_items}"
+        return f"Cart ID: {self.cart_id}, Customer: {self.customer.user.first_name}, Total Price: {self.total_price}, Total Items: {self.total_items}"
 
-class CartItems(models.Model):
-    cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
+class CartItem(models.Model):
+    cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    quantity_buying = models.PositiveIntegerField(default=1)
+    product_quantity = models.PositiveIntegerField()
 
     def subtotal(self):
-        return self.quantity_buying * self.product.discounted_price
+        if self.product_quantity is None:
+            return 0
+        return self.product_quantity * self.product.discountedPrice
 
     def save(self, *args, **kwargs):
-        self.cart.total_price += self.subtotal()
-        self.cart.total_items += self.quantity_buying
         self.cart.save()
         super().save(*args, **kwargs)
 
@@ -33,7 +33,7 @@ class CartItems(models.Model):
         super().delete(*args, **kwargs)
 
     def __str__(self):
-        return f"Cart ID: {self.cart_id}, Product: {self.product.name}, Quantity Buying: {self.quantity_buying}, Subtotal: {self.subtotal()}"
+        return f"Cart ID: {self.cart_id}, Product: {self.product.name}, Total Quantity: {self.product_quantity}, Subtotal: {self.subtotal()}"
 
 
 
@@ -67,3 +67,4 @@ class OrderItems(models.Model):
 
     def __str__(self):
         return f"Order ID: {self.order_id}, Product: {self.product.name}, Quantity Bought: {self.quantity_bought}, Subtotal: {self.subtotal}"
+
