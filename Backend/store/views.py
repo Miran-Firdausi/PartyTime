@@ -1,10 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from rest_framework import status
 from django.http import JsonResponse
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Product, ProductSeller
-from .serializers import ProductSerializer, ProductSellerSerializer
+from .models import Product
+from .serializers import ProductSerializer
 
 
 def index(request):
@@ -31,26 +31,5 @@ def add_product(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     else:
         return Response()
-
-
-@api_view(['GET'])
-def get_product_sellers(request, product_id):
-    product = get_object_or_404(Product, id=product_id)
-
-    product_serializer = ProductSerializer(product)
-    product_data = product_serializer.data
-
-    product_sellers = ProductSeller.objects.filter(product=product)
-    seller_data = []
-    for seller in product_sellers:
-        seller_serializer = ProductSellerSerializer(seller)
-        seller_data.append({
-            **seller_serializer.data,
-            'discountedPrice': seller.discountedPrice
-        })
-
-    product_data['sellers'] = seller_data
-
-    return Response(product_data)
 
 

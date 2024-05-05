@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Product, Category, ProductSeller
+from .models import Product, Category
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -15,15 +15,4 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = '__all__'
-
-
-class ProductSellerSerializer(serializers.ModelSerializer):
-    seller_name = serializers.SerializerMethodField()
-
-    class Meta:
-        model = ProductSeller
-        fields = ['id', 'quantity', 'expiry_date', 'expiry_image', 'seller_name']
-
-    def get_seller_name(self, obj):
-        return obj.seller.user.first_name
 
