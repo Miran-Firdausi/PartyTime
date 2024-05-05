@@ -1,4 +1,3 @@
-"use client"
 import React, { useState } from 'react';
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import styles from '@/styles/navbar.module.css';
@@ -6,13 +5,17 @@ import Link from 'next/link';
 import AutoPlaceFill from './PlaceAutoFill';
 import LocationPop from './LocationPop';
 import { useCart } from '@/contextapi/CartContext';
-
+import axios from 'axios';
 
 const Navbar = (props) => {
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState('');
-  const [latitude, setLatitude] = useState(); // Default latitude
-  const [longitude, setLongitude] = useState(); // Default longitude
+  const [latitude, setLatitude] = useState();
+  const [longitude, setLongitude] = useState();
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [inputFocused, setInputFocused] = useState(false);
+
   const { cart } = useCart();
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cart.reduce((total, item) => total + (item.discountedPrice * item.quantity), 0);
@@ -41,6 +44,16 @@ const Navbar = (props) => {
     let lon = position.coords.longitude;
     setLatitude(lat);
     setLongitude(lon);
+  }
+
+  async function handleSearch() {
+    try {
+      const response = await axios.get(`http://127.0.0.1:8000/products/search/?query=${searchQuery}`);
+      setSearchResults(response.data);
+      console.log(response.data);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
   }
 
   return (
@@ -73,11 +86,35 @@ const Navbar = (props) => {
         </div>
       </div>
       <div className={styles['navbar-search']}>
-        <input type="text" placeholder="Search for party food items..." />
-        <button>
-          <FaSearch />
-        </button>
+        <input
+          type="text"
+          placeholder="Search for party food items..."
+          value={searchQuery}
+          onChange={(e) => {setSearchQuery(e.target.value); handleSearch()}}
+          onFocus={() => setInputFocused(true)}
+          onBlur={() => setInputFocused(false)}
+        />
+        {inputFocused && (
+          <div className={styles.searchResults}>
+            {searchResults.length > 0 ? (
+              <>
+                <h3>Search Results:</h3>
+                <ul className={styles.searchResultsList}>
+                  {searchResults.map((product) => (
+                    <li key={product.id} className={styles.resultRow}>
+                        <img src={'http://127.0.0.1:8000'+product.product_image} width={50} height={50} />
+                      <Link href={`/store/${product.id}`} onClick={() => setClicked(true)}>{product.name}</Link>
+                    </li>
+                  ))}
+                </ul>
+              </>
+            ) : (
+              <p>No results found.</p>
+            )}
+          </div>
+        )}
       </div>
+
       <div className={styles['navbar-links']}>
         <Link className={styles.navlink} href="/about">
           About
