@@ -124,7 +124,6 @@
     border: none;
     border-radius: 5px 0 0 5px; /* Add border radius for rounded corners */
     margin-right: -1px; /* Move the input field slightly to the right to align with the button */
-    width: calc(100% - 40px); /* Calculate width to account for button width and margin */
     vertical-align: middle; /* Align the input field vertically in the middle */
   }
   
@@ -357,4 +356,46 @@
 .mapIcon {
   min-width: 20px;
  min-width: 20px;
+}
+
+.searchResults {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  color: #000;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  padding: 10px;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+}
+
+.searchResultsList {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.searchResultsList li {
+  padding: 8px 0;
+}
+
+.searchResultsList li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+.searchResultsList li a:hover {
+  color: #007bff;
+}
+
+.resultRow {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 }
