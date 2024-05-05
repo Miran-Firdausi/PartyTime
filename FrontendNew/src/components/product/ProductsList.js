@@ -41,7 +41,7 @@ import styles from "@/styles/product/productsList.module.css"
               name={product.name}
               originalPrice={product.originalPrice}
               discountedPrice={product.discountedPrice}
-              image={product.image}
+              image={'http://127.0.0.1:8000'+product.product_image}
               weight={product.weight}
             />
           ))}

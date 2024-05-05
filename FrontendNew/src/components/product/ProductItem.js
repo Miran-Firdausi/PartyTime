@@ -100,7 +100,7 @@ const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) =>
             <span>200m</span>
           </div>
           <h2 className={styles.name}>{name}</h2>
-          <p className={styles.productWeight}>{weight}</p>
+          <p className={styles.productWeight}>{weight}g</p>
           <div className={styles.priceContainer}>
             <div>
               <p className={styles.originalPrice}>₹{originalPrice}</p>

@@ -30,9 +30,6 @@ class CartItem(models.Model):
         super().save(*args, **kwargs)
 
     def delete(self, *args, **kwargs):
-        self.cart.total_amount -= self.subtotal()
-        self.cart.total_items -= self.quantity_buying
-        self.cart.save()
         super().delete(*args, **kwargs)
 
     def __str__(self):

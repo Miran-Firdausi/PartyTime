@@ -9,7 +9,8 @@ const SellerRegistration = () => {
     password: '',
     phone: '',
     aadhar_number: '',
-    license_number: ''
+    license_number: '',
+    seller_upi: ''
   });
 
   const handleChange = (e) => {
@@ -107,6 +108,16 @@ const SellerRegistration = () => {
             type="text" 
             name="license_number" 
             value={formData.license_number} 
+            onChange={handleChange} 
+            required 
+          />
+        </div>
+        <div>
+          <label>Seller UPI:</label>
+          <input 
+            type="text" 
+            name="seller_upi" 
+            value={formData.seller_upi} 
             onChange={handleChange} 
             required 
           />
