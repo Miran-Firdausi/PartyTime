@@ -122,7 +122,7 @@
   .navbar-search input[type="text"] {
     padding: 8px 16px; /* Adjust padding as needed */
     border: none;
-    border-radius: 5px 0 0 5px; /* Add border radius for rounded corners */
+    border-radius: 5px; /* Add border radius for rounded corners */
     margin-right: -1px; /* Move the input field slightly to the right to align with the button */
     vertical-align: middle; /* Align the input field vertically in the middle */
   }
@@ -398,4 +398,9 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+}
+
+.resultRow:hover {
+  cursor: pointer;
+  color: blue;
 }

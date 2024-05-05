@@ -5,12 +5,13 @@
     justify-content: center;
     align-items: center;
     min-height: calc(100vh - 71px);
+    margin: 10px 0 10px 0;
   }
   
   .registrationContainer {
     width: 400px; /* Reduced width */
     height: max-content;
-    padding: 15px; /* Reduced padding */
+    padding: 15px 20px; /* Reduced padding */
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;

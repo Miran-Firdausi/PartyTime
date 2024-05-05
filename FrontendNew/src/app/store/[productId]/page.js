@@ -11,7 +11,7 @@ export default function ProductDetails({ params }) {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/products/');
+        const response = await fetch('http://127.0.0.1:8000/products/all/');
         if (!response.ok) {
           throw new Error('Failed to fetch products');
         }
@@ -56,20 +56,20 @@ export default function ProductDetails({ params }) {
       <div className={styles.productDetails}>
         <h2>Product Details</h2>
         <ul>
-          {renderProductInfo("Flavour", product.flavour)}
-          {renderProductInfo("Unit", product.weight)}
-          {renderProductInfo("Shelf Life", product.shelfLife)}
-          {renderProductInfo("Manufacturer", product.manufacturer)}
-          {renderProductInfo("Marketed By", product.marketedBy)}
-          {renderProductInfo("Country Of Origin", product.countryOfOrigin)}
-          {renderProductInfo("FSSAI License", product.fssaiLicense)}
+          {/* {renderProductInfo("Flavour", product.flavour)} */}
+          {renderProductInfo("Unit", product.weight+"g/ml")}
+          {renderProductInfo("Shelf Life", /*product.shelfLife*/"6 months")}
+          {renderProductInfo("Manufacturer", product.sellers[0].seller_name)}
+          {renderProductInfo("Marketed By", product.sellers[0].seller_name)}
+          {renderProductInfo("Country Of Origin", /*product.countryOfOrigin*/"India")}
+          {renderProductInfo("FSSAI License", product.sellers[0].seller.license_number)}
           {renderProductInfo("Customer Care Details", "Email: info@partytime.com")}
           {renderProductInfo("Return Policy", "This Item is non-returnable. For a damaged, defective, incorrect or expired item, you can request a replacement within 72 hours of delivery.In case of an incorrect item, you may raise a replacement or return request only if the item is sealed/ unopened/ unused and in original condition.")}
-          {renderProductInfo("Expiry Date", product.expiryDate)}
+          {renderProductInfo("Expiry Date", product.sellers[0].expiry_date)}
           {renderProductInfo("Net Volume", product.weight)}
-          {renderProductInfo("Packaging Type", product.packagingType)}
-          {renderProductInfo("Seller", product.seller)}
-          {renderProductInfo("Seller FSSAI", product.sellerFssai)}
+          {renderProductInfo("Packaging Type", /*product.packagingType*/"packaged product")}
+          {renderProductInfo("Seller", product.sellers[0].seller_name)}
+          {renderProductInfo("Seller FSSAI", product.sellers[0].seller.license_number)}
           {renderProductInfo("Description", product.description)}
           {renderProductInfo("Disclaimer", "Every effort is made to maintain the accuracy of all information. However, actual product packaging and materials may contain more and/or different information. It is recommended not to solely rely on the information presented.")}
         </ul>

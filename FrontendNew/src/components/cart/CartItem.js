@@ -73,17 +73,17 @@ const CartItem = ({ product }) => {
       }
     }
   };
-
+  console.log(product);
   return (
     <div className={styles.cartItem}>
       <div className={styles.productImage}>
-        <img src={product.product_image} alt={product.name} onClick={handleProductClick}/>
+        <img src={'http://127.0.0.1:8000'+product.product_image} alt={product.name} onClick={handleProductClick}/>
       </div>
       <div className={styles.itemDetails}>
         <h3 className={styles.productName}>{product.name}</h3>
         <div className={styles.priceContainer}>
           <p className={styles.originalPrice}>₹{product.originalPrice}</p>
-          <p className={styles.discountedPrice}>₹{product.discountedPrice}</p>
+          <p className={styles.discountedPrice}>₹{product.originalPrice-5}</p>
         </div>
         <p className={styles.productDescription}>{product.description}</p>
         <div className={styles.quantityContainer}>

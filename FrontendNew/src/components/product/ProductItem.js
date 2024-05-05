@@ -94,10 +94,10 @@ const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) =>
     
     <div className={styles.productList}>
       <div className={styles.product}>
-        <img className={styles.productImage} src={image} alt={name} onClick={handleProductClick}/>
+        <img className={styles.productImage} src={'http://127.0.0.1:8000'+image} alt={name} onClick={handleProductClick}/>
         <div className={styles.info}>
           <div className={styles.distance}>
-            <span>200m</span>
+            <span>0.4km</span>
           </div>
           <h2 className={styles.name}>{name}</h2>
           <p className={styles.productWeight}>{weight}g</p>

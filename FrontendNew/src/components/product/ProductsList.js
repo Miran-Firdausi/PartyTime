@@ -25,7 +25,7 @@ import styles from "@/styles/product/productsList.module.css"
         });
       }
     };
-  
+    console.log(products);
     return (
       <div className={styles.productsListOuterContainer}>
       <span className={styles.productsListTitle}>{category}</span>
@@ -40,8 +40,8 @@ import styles from "@/styles/product/productsList.module.css"
               id={product.id}
               name={product.name}
               originalPrice={product.originalPrice}
-              discountedPrice={product.discountedPrice}
-              image={'http://127.0.0.1:8000'+product.product_image}
+              discountedPrice={product.sellers[0].discountedPrice}
+              image={product.product_image}
               weight={product.weight}
             />
           ))}
