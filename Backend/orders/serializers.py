@@ -1,14 +1,17 @@
 from rest_framework import serializers
 from .models import Cart, CartItem, Order, OrderItem
-from store.serializers import ProductSerializer
+from store.serializers import ProductSerializer, ProductSellerSerializer
 from core.serializers import CustomerSerializer, SellerSerializer
+
 
 class CartItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer(read_only=True)
+    product_seller = ProductSellerSerializer(read_only=True)
 
     class Meta:
         model = CartItem
-        fields = ['id', 'product', 'product_quantity']
+        fields = ['id', 'product', 'product_seller', 'product_quantity']
+
 
 class CartSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer()
@@ -18,12 +21,15 @@ class CartSerializer(serializers.ModelSerializer):
         model = Cart
         fields = ['cart_id', 'customer', 'items_in_cart', 'total_amount', 'total_items']
 
+
 class OrderItemSerializer(serializers.ModelSerializer):
     product = ProductSerializer()
+    seller = SellerSerializer()
 
     class Meta:
         model = OrderItem
-        fields = ['id', 'product', 'total_quantity', 'total_amount']
+        fields = ['id', 'product', 'seller', 'total_quantity', 'total_amount']
+
 
 class OrderSerializer(serializers.ModelSerializer):
     customer = CustomerSerializer()

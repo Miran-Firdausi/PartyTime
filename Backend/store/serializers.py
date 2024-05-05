@@ -2,6 +2,7 @@ from rest_framework import serializers
 from .models import Product, Category, ProductSeller
 from core.serializers import SellerSerializer
 
+
 class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
@@ -20,10 +21,10 @@ class ProductSerializer(serializers.ModelSerializer):
 class ProductSellerSerializer(serializers.ModelSerializer):
     seller_name = serializers.SerializerMethodField()
     seller = SellerSerializer()
-    
+
     class Meta:
         model = ProductSeller
-        fields = ['id', 'quantity', 'expiry_date', 'expiry_image', 'seller_name', 'seller']
+        fields = ['id', 'seller', 'quantity', 'expiry_date', 'expiry_image', 'discountedPrice', 'seller_name']
 
     def get_seller_name(self, obj):
         return obj.seller.user.first_name

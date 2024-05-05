@@ -1,6 +1,7 @@
 from django.db import models
-from store.models import Product
+from store.models import Product, ProductSeller
 from core.models import User, Customer, Seller
+
 
 class Cart(models.Model):
     cart_id = models.AutoField(primary_key=True)
@@ -20,11 +21,12 @@ class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     product_quantity = models.PositiveIntegerField()
+    product_seller = models.ForeignKey(ProductSeller, on_delete=models.CASCADE)
 
     def subtotal(self):
         if self.product_quantity is None:
             return 0
-        return self.product_quantity * self.product.discountedPrice
+        return self.product_quantity * self.product_seller.discountedPrice
 
     def save(self, *args, **kwargs):
         self.cart.save()
