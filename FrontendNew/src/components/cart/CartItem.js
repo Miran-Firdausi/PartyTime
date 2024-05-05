@@ -83,7 +83,7 @@ const CartItem = ({ product }) => {
         <h3 className={styles.productName}>{product.name}</h3>
         <div className={styles.priceContainer}>
           <p className={styles.originalPrice}>₹{product.originalPrice}</p>
-          <p className={styles.discountedPrice}>₹{product.sellers[0].discountedPrice}</p>
+          <p className={styles.discountedPrice}>₹{product.originalPrice-5}</p>
         </div>
         <p className={styles.productDescription}>{product.description}</p>
         <div className={styles.quantityContainer}>

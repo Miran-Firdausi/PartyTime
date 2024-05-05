@@ -54,7 +54,7 @@ export const CartProvider = ({ children }) => {
           id: item.product.id,
           name: item.product.name,
           originalPrice: item.product.originalPrice,
-          discountedPrice: item.product.sellers[0].discountedPrice,
+          discountedPrice: item.product.originalPrice-5,
           product_image: item.product.product_image,
           weight: item.product.weight,
           quantity: item.product_quantity
@@ -79,7 +79,7 @@ export const CartProvider = ({ children }) => {
           quantity: item.quantity
         }));
 
-        const totalAmount = cart.reduce((total, item) => total + (item.quantity * item.discountedPrice), 0);
+        const totalAmount = cart.reduce((total, item) => total + (item.quantity * item.originalPrice), 0);
         const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
         const data = {
           items: formattedCart,

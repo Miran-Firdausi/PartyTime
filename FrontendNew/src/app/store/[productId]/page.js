@@ -56,18 +56,18 @@ export default function ProductDetails({ params }) {
       <div className={styles.productDetails}>
         <h2>Product Details</h2>
         <ul>
-          {renderProductInfo("Flavour", product.flavour)}
-          {renderProductInfo("Unit", product.weight)}
-          {renderProductInfo("Shelf Life", product.shelfLife)}
-          {renderProductInfo("Manufacturer", product.manufacturer)}
-          {renderProductInfo("Marketed By", product.marketedBy)}
-          {renderProductInfo("Country Of Origin", product.countryOfOrigin)}
-          {renderProductInfo("FSSAI License", product.fssaiLicense)}
+          {/* {renderProductInfo("Flavour", product.flavour)} */}
+          {renderProductInfo("Unit", product.weight+"g/ml")}
+          {renderProductInfo("Shelf Life", /*product.shelfLife*/"6 months")}
+          {renderProductInfo("Manufacturer", product.sellers[0].seller_name)}
+          {renderProductInfo("Marketed By", product.sellers[0].seller_name)}
+          {renderProductInfo("Country Of Origin", /*product.countryOfOrigin*/"India")}
+          {renderProductInfo("FSSAI License", product.sellers[0].seller.license_number)}
           {renderProductInfo("Customer Care Details", "Email: info@partytime.com")}
           {renderProductInfo("Return Policy", "This Item is non-returnable. For a damaged, defective, incorrect or expired item, you can request a replacement within 72 hours of delivery.In case of an incorrect item, you may raise a replacement or return request only if the item is sealed/ unopened/ unused and in original condition.")}
           {renderProductInfo("Expiry Date", product.sellers[0].expiry_date)}
           {renderProductInfo("Net Volume", product.weight)}
-          {renderProductInfo("Packaging Type", product.packagingType)}
+          {renderProductInfo("Packaging Type", /*product.packagingType*/"packaged product")}
           {renderProductInfo("Seller", product.sellers[0].seller_name)}
           {renderProductInfo("Seller FSSAI", product.sellers[0].seller.license_number)}
           {renderProductInfo("Description", product.description)}
