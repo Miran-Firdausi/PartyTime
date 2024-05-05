@@ -53,7 +53,6 @@ export default function ProductInfo({ product }) {
           });
         }
     };
-    console.log(product);
     const handleQuantityChange = (operation) => {
         if (operation === 'increment') {
           setQuantity(quantity + 1);

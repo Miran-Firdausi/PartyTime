@@ -41,7 +41,7 @@ const SellerProductsList = ({ category, products = [], setProducts }) => {
                             id={product.id}
                             name={product.name}
                             originalPrice={product.originalPrice}
-                            discountedPrice={product.sellers[0].discountedPrice}
+                            discountedPrice={product.discountedPrice}
                             image={product.image}
                             weight={product.weight}
                             quantity={product.quantity}

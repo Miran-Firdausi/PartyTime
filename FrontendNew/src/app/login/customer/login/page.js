@@ -33,7 +33,7 @@ const CustomerLogin = () => {
         id: item.product.id,
         name: item.product.name,
         originalPrice: item.product.originalPrice,
-        discountedPrice: item.product.sellers[0].discountedPrice,
+        discountedPrice: item.product_seller.discountedPrice,
         product_image: item.product.product_image,
         weight: item.product.weight,
         quantity: item.product_quantity
