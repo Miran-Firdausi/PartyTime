@@ -51,9 +51,6 @@ def seller_register(request):
     if request.method == 'POST':
         user_serializer = UserSerializer(data=request.data)
         seller_serializer = SellerSerializer(data=request.data)
-        aadhar_number = request.data.pop('aadhar_number')
-        license_number = request.data.pop('license_number')
-        seller_upi = request.data.pop('seller_upi')
 
         email = request.data.get('email')
         existing_user = User.objects.filter(email=email).first()
@@ -65,9 +62,15 @@ def seller_register(request):
                 return Response({'message': 'User is already registered as a Customer'}, status=400)
         else:
             if user_serializer.is_valid():
+                aadhar_number = request.data.pop('aadhar_number')
+                license_number = request.data.pop('license_number')
+                seller_upi = request.data.pop('seller_upi')
                 user_data = request.data
                 user = User.objects.create_user(**user_data)
-                seller = Seller.objects.create(user=user, aadhar_number=aadhar_number, license_number=license_number)
+                user.is_customer = True
+                user.is_seller = True
+                Customer.objects.create(user=user)
+                Seller.objects.create(user=user, aadhar_number=aadhar_number, license_number=license_number, seller_upi=seller_upi)
                 return Response(user_serializer.data, status=201)
             else:
                 errors = {}
