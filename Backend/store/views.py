@@ -14,11 +14,11 @@ def index(request):
     return JsonResponse(message)
 
 
-#@api_view(['GET'])
+@api_view(['GET'])
 def get_products(request):
-    products = Product.objects.all()  # Query all products
-    serializer = ProductSerializer(products, many=True)  # Serialize the products
-    return JsonResponse(serializer.data,safe=False)  # Ret
+    products = Product.objects.all()
+    serializer = ProductSerializer(products, many=True)
+    return JsonResponse(serializer.data, safe=False)
 
 
 @api_view(['POST', 'GET'])
