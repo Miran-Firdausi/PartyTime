@@ -54,8 +54,8 @@ export const CartProvider = ({ children }) => {
           id: item.product.id,
           name: item.product.name,
           originalPrice: item.product.originalPrice,
-          discountedPrice: item.product.discountedPrice,
-          product_image: 'http://127.0.0.1:8000'+item.product.product_image,
+          discountedPrice: item.product.sellers[0].discountedPrice,
+          product_image: item.product.product_image,
           weight: item.product.weight,
           quantity: item.product_quantity
         }));

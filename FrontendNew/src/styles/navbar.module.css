@@ -399,3 +399,8 @@
     flex-direction: row;
     align-items: center;
 }
+
+.resultRow:hover {
+  cursor: pointer;
+  color: blue;
+}

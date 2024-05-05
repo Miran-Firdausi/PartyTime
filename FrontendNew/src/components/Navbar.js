@@ -6,8 +6,11 @@ import AutoPlaceFill from './PlaceAutoFill';
 import LocationPop from './LocationPop';
 import { useCart } from '@/contextapi/CartContext';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
+
 
 const Navbar = (props) => {
+  const router = useRouter();
   const [isLocationMenuOpen, setIsLocationMenuOpen] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState('');
   const [latitude, setLatitude] = useState();
@@ -19,6 +22,12 @@ const Navbar = (props) => {
   const { cart } = useCart();
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cart.reduce((total, item) => total + (item.discountedPrice * item.quantity), 0);
+
+  const handleSearchClick = (productid) => {
+    // Programmatically navigate to the product detail page
+    router.push(`/store/${productid}`);
+    setInputFocused(false);
+  };
 
   function toggleLocationMenu() {
     setIsLocationMenuOpen((prevState) => !prevState);
@@ -92,7 +101,6 @@ const Navbar = (props) => {
           value={searchQuery}
           onChange={(e) => {setSearchQuery(e.target.value); handleSearch()}}
           onFocus={() => setInputFocused(true)}
-          onBlur={() => setInputFocused(false)}
         />
         {inputFocused && (
           <div className={styles.searchResults}>
@@ -101,9 +109,9 @@ const Navbar = (props) => {
                 <h3>Search Results:</h3>
                 <ul className={styles.searchResultsList}>
                   {searchResults.map((product) => (
-                    <li key={product.id} className={styles.resultRow}>
+                    <li key={product.id} className={styles.resultRow} onClick={()=>handleSearchClick(product.id)}>
                         <img src={'http://127.0.0.1:8000'+product.product_image} width={50} height={50} />
-                      <Link href={`/store/${product.id}`} onClick={() => setClicked(true)}>{product.name}</Link>
+                        <p>{product.name}</p>
                     </li>
                   ))}
                 </ul>

@@ -45,8 +45,8 @@ export default function ProductInfo({ product }) {
               id: product.id,
               name: product.name,
               originalPrice: product.originalPrice,
-              discountedPrice: product.discountedPrice,
-              image: 'http://127.0.0.1:8000'+product.product_image,
+              discountedPrice: product.sellers[0].discountedPrice,
+              image: product.product_image,
               weight: product.weight,
               quantity: 1,
             },
@@ -98,7 +98,7 @@ export default function ProductInfo({ product }) {
                 <h3 className={styles.productName}>{product.name}</h3>
                 <div className={styles.priceContainer}>
                     <p className={styles.originalPrice}>₹{product.originalPrice}</p>
-                    <p className={styles.discountedPrice}>₹{product.discountedPrice}</p>
+                    <p className={styles.discountedPrice}>₹{product.sellers[0].discountedPrice}</p>
                 </div>
                 <p className={styles.productDescription}>Description: {product.description}</p>
                 <div className={styles.quantityContainer}>
@@ -112,7 +112,7 @@ export default function ProductInfo({ product }) {
                 </div>
                 <p className={styles.productCategory}>Category: {product.category.name}</p>
                 <p className={styles.productWeight}>Weight: {product.weight}</p>
-                <p className={styles.productExpiry}>Expiry Date: {product.expiryDate}</p>
+                <p className={styles.productExpiry}>Expiry Date: {product.sellers[0].expiry_date}</p>
             </div>
         </div>
     );

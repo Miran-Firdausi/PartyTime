@@ -31,7 +31,7 @@ class Customer(models.Model):
     objects = CustomerManager()
 
     def __str__(self):
-        return self.user.name
+        return self.user.first_name
 
 
 class Seller(models.Model):
@@ -44,16 +44,21 @@ class Seller(models.Model):
     seller_upi = models.CharField(max_length=255, null=True)
 
     def __str__(self):
-        return self.user.name
+        return self.user.first_name
 
 
 class Shop(models.Model):
-    owner = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name='shops')
+    owner = models.OneToOneField(Seller, on_delete=models.CASCADE, related_name='shops')
+    address_line_1 = models.CharField(max_length=255)
+    address_line_2 = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=100)
+    state = models.CharField(max_length=100)
+    postal_code = models.CharField(max_length=20)
+    country = models.CharField(max_length=100)
+    rating = models.DecimalField(max_digits=3, decimal_places=2, default=0.00)
+    closing_time = models.TimeField(null=True, blank=True)
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
 
-
-# class Admin(AbstractUser):
-#
-#     # objects = SellerManager()
-#
-#     def __str__(self):
-#         return self.email
+    def __str__(self):
+        return self.owner.user.first_name
