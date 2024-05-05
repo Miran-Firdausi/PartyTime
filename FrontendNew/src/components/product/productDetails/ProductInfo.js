@@ -46,14 +46,14 @@ export default function ProductInfo({ product }) {
               name: product.name,
               originalPrice: product.originalPrice,
               discountedPrice: product.discountedPrice,
-              image: product.image,
+              image: 'http://127.0.0.1:8000'+product.product_image,
               weight: product.weight,
               quantity: 1,
             },
           });
         }
     };
-
+    console.log(product);
     const handleQuantityChange = (operation) => {
         if (operation === 'increment') {
           setQuantity(quantity + 1);
@@ -84,14 +84,14 @@ export default function ProductInfo({ product }) {
                 onMouseLeave={handleMouseLeave}
                 onMouseMove={handleMouseMove}
                 style={{
-                    backgroundImage: hovered ? `url(${product.image})` : 'none',
+                    backgroundImage: hovered ? `url(${'http://127.0.0.1:8000'+product.product_image})` : 'none',
                     backgroundPosition: `${position.x * 100}% ${position.y * 100}%`,
                     backgroundSize: hovered ? '130%' : 'cover',
                     transition: 'background-size 0.3s',
                 }}
             >
             {hovered ? null : (
-                <img src={product.image} alt={product.name} />
+                <img src={'http://127.0.0.1:8000'+product.product_image} alt={product.name} />
             )}
             </div>
             <div className={styles.itemDetails}>
@@ -110,7 +110,7 @@ export default function ProductInfo({ product }) {
                         onIncrement={()=> handleQuantityChange('increment')}
                     />
                 </div>
-                <p className={styles.productCategory}>Category: {product.category}</p>
+                <p className={styles.productCategory}>Category: {product.category.name}</p>
                 <p className={styles.productWeight}>Weight: {product.weight}</p>
                 <p className={styles.productExpiry}>Expiry Date: {product.expiryDate}</p>
             </div>

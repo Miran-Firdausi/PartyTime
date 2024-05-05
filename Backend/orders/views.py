@@ -42,8 +42,11 @@ def add_to_cart(request):
             )
 
             if not created:
-                cart_item.product_quantity = product_quantity
-            cart_item.save()
+                if product_quantity is "0":
+                    cart_item.delete()
+                else:
+                    cart_item.product_quantity = product_quantity
+                    cart_item.save()
 
         serializer = CartSerializer(cart)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

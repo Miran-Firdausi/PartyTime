@@ -43,7 +43,7 @@ const CartItem = ({ product }) => {
             name,
             originalPrice,
             discountedPrice,
-            image,
+            product_image,
             weight,
             quantity: 1,
           },
@@ -77,7 +77,7 @@ const CartItem = ({ product }) => {
   return (
     <div className={styles.cartItem}>
       <div className={styles.productImage}>
-        <img src={product.image} alt={product.name} onClick={handleProductClick}/>
+        <img src={product.product_image} alt={product.name} onClick={handleProductClick}/>
       </div>
       <div className={styles.itemDetails}>
         <h3 className={styles.productName}>{product.name}</h3>

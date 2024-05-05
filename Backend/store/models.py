@@ -31,6 +31,7 @@ def product_image_path(instance, filename):
 
 class Product(models.Model):
     name = models.CharField(max_length=255, null=False)
+    description = models.CharField(max_length=1000, null=True)
     originalPrice = models.DecimalField(null=False, max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     product_image = models.ImageField(null=True, upload_to=product_image_path)

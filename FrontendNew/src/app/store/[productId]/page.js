@@ -1,4 +1,5 @@
 'use client'
+import React, {useState, useEffect} from "react";
 import ProductInfo from "@/components/product/productDetails/ProductInfo";
 import { products } from "../page";
 import ShopList from "@/components/product/productDetails/ShopList";
