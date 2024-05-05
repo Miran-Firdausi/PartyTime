@@ -31,6 +31,7 @@ def add_to_cart(request):
         cart.total_amount = request.data.get('total_amount')
         cart.total_items = request.data.get('total_items')
         cart.save()
+
         for item in items:
             product_id = item.get('product').get('id')
             product = get_object_or_404(Product, id=product_id)
@@ -94,7 +95,6 @@ def make_order(request):
         # Serialize the order and order items
         serializer = OrderSerializer(order)
         order_item_serializers = [OrderItemSerializer(item) for item in order_items]
-
 
         return Response(serializer.data, status=status.HTTP_201_CREATED)
     else:

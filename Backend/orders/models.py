@@ -8,12 +8,13 @@ class Cart(models.Model):
     items_in_cart = models.ManyToManyField(Product, through='CartItem')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     total_items = models.PositiveIntegerField(default=0)
-    
+
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
-        
+
     def __str__(self):
-        return f"Cart ID: {self.cart_id}, Customer: {self.customer.user.first_name}, Total Price: {self.total_amount}, Total Items: {self.total_items}"
+        return f"Cart ID: {self.cart_id}, Customer: {self.customer.user.first_name}, Total Amount: {self.total_amount}, Total Items: {self.total_items}"
+
 
 class CartItem(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
@@ -36,7 +37,6 @@ class CartItem(models.Model):
         return f"Cart ID: {self.cart_id}, Product: {self.product.name}, Total Quantity: {self.product_quantity}, Subtotal: {self.subtotal()}"
 
 
-
 class Order(models.Model):
     order_id = models.AutoField(primary_key=True)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -52,6 +52,7 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Order ID: {self.order_id}, Customer: {self.customer.user.first_name}, Seller ID: {self.seller_id}, Total: {self.total_amount}, Status: {self.transaction_status}"
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='order_items')

@@ -90,7 +90,15 @@ def customer_login(request):
             user = authenticate(email=email, password=password)
             if user:
                 auth_login(request, user)
-                return Response({'message': 'Login successful', 'user': user.email}, status=200)
+                user_data = {
+                    'id': user.id,
+                    'email': user.email,
+                    'phone': user.phone,
+                    'first_name': user.first_name,
+                    'last_name': user.last_name,
+                    'date_joined': user.date_joined.strftime('%Y-%m-%d %H:%M:%S'),  # Convert datetime to string
+                }
+                return Response({'message': 'Login successful', 'user': user_data}, status=200)
             return Response({'message': 'Invalid credentials', 'email': email}, status=401)
         else:
             return Response({'message': 'email and password are required'})

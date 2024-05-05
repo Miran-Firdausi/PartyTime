@@ -14,6 +14,23 @@ class MyTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
+    def validate(self, attrs):
+        data = super().validate(attrs)
+
+        # Include user details in the response data
+        user = self.user
+        user_data = {
+            'id': user.id,
+            'email': user.email,
+            'phone': user.phone,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'date_joined': user.date_joined.strftime('%Y-%m-%d %H:%M:%S'),
+        }
+        data['user'] = user_data
+
+        return data
+
 
 class UserSerializer(serializers.ModelSerializer):
     email = serializers.EmailField()

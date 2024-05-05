@@ -25,7 +25,7 @@ class Category(models.Model):
 def product_image_path(instance, filename):
     # Construct the upload path for product images
     ext = filename.split('.')[-1]  # Get the file extension
-    filename = f"{instance.name}_{now().strftime('%Y%m%d%H%M%S')}.{ext}"  # Rename the file with the product name and timestamp
+    filename = f"{instance.name}_{now().strftime('%Y%m%d%H%M%S')}.{ext}"
     return os.path.join('product_images', filename)
 
 
@@ -42,8 +42,6 @@ class Product(models.Model):
     seller_id = models.ForeignKey(Seller, on_delete=models.CASCADE)
     quantity = models.IntegerField()
     discountedPrice = models.DecimalField(max_digits=10, decimal_places=2, null=True)
-
-
 
     def __str__(self):
         return self.name
