@@ -54,7 +54,7 @@ export const CartProvider = ({ children }) => {
           id: item.product.id,
           name: item.product.name,
           originalPrice: item.product.originalPrice,
-          discountedPrice: item.product.originalPrice-5,
+          discountedPrice: item.product_seller.discountedPrice,
           product_image: item.product.product_image,
           weight: item.product.weight,
           quantity: item.product_quantity
@@ -86,7 +86,6 @@ export const CartProvider = ({ children }) => {
           total_amount: totalAmount,
           total_items: totalItems
         };
-        console.log(JSON.stringify(data))
         const accessToken = localStorage.getItem('accessToken');
         const response = await fetch('http://127.0.0.1:8000/cart/add/', {
           method: 'POST',
