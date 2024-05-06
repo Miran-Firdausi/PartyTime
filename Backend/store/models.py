@@ -62,21 +62,21 @@ class ProductSeller(models.Model):
         if self.expiry_date:
             days_to_expire = (self.expiry_date - timezone.now().date()).days
             if days_to_expire <= 1:
-                discount_percentage = 0.9
+                discount_percentage = 0.5
             elif days_to_expire <= 5:
-                discount_percentage = 0.8
-            elif days_to_expire <= 10:
-                discount_percentage = 0.6
-            elif days_to_expire <= 15:
                 discount_percentage = 0.4
-            elif days_to_expire <= 30:
+            elif days_to_expire <= 10:
+                discount_percentage = 0.3
+            elif days_to_expire <= 15:
                 discount_percentage = 0.2
-            elif days_to_expire <= 60:
+            elif days_to_expire <= 30:
                 discount_percentage = 0.1
+            elif days_to_expire <= 60:
+                discount_percentage = 0.05
             else:
                 discount_percentage = 0
             discounted_price = float(self.product.originalPrice) * (1 - discount_percentage)
-            return discounted_price
+            return round(discounted_price)
         return self.product.originalPrice
 
     def save(self, *args, **kwargs):

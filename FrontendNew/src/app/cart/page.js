@@ -4,8 +4,10 @@ import React from 'react';
 import CartItem from '@/components/cart/CartItem';
 import styles from '@/styles/cart/cart.module.css';
 import { useCart } from '@/contextapi/CartContext';
+import { useRouter } from 'next/navigation';
 
 const Cart = () => {
+  const router = useRouter();
   const { cart } = useCart();
   const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
   const totalPrice = cart.reduce((total, item) => total + (item.discountedPrice * item.quantity), 0);
@@ -35,7 +37,7 @@ const Cart = () => {
                 <p>Total Items: {cart.length}</p>
                 <p>Total Quantity: {totalQuantity}</p>
                 <p>Total Price: ₹{totalPrice}</p>
-                <button className={styles.proceedButton}>Proceed to Buy</button>
+                <button className={styles.proceedButton} onClick={()=>{router.push('/order');}}>Proceed to Buy</button>
               </div>
             </div>
       </div>

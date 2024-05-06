@@ -4,7 +4,7 @@ import styles from '@/styles/product/product.module.css'; // Import CSS module f
 import { useCart } from '@/contextapi/CartContext';
 import { useRouter } from 'next/navigation';
 
-const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) => {
+const Product = ({ id, name, originalPrice, discountedPrice, image, weight, product_seller }) => {
   const router = useRouter();
   const { cart, dispatch } = useCart();
   const existingProduct = cart.find(item => item.id === id);
@@ -17,6 +17,7 @@ const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) =>
   };
 
   const handleAddToCart = (isAdded) => {
+    console.log("product seller id: "+product_seller);
       if (existingProduct) {
         // If the product already exists in the cart, update its quantity
         dispatch({
@@ -38,6 +39,7 @@ const Product = ({ id, name, originalPrice, discountedPrice, image, weight }) =>
             image,
             weight,
             quantity: 1,
+            product_seller
           },
         });
       }

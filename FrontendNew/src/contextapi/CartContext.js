@@ -57,7 +57,8 @@ export const CartProvider = ({ children }) => {
           discountedPrice: item.product_seller.discountedPrice,
           product_image: item.product.product_image,
           weight: item.product.weight,
-          quantity: item.product_quantity
+          quantity: item.product_quantity,
+          product_seller: item.product_seller.id
         }));
         dispatch({ type: 'SET_CART', payload: formattedCart });
       } catch (error) {
@@ -76,6 +77,7 @@ export const CartProvider = ({ children }) => {
           product: {
             id: item.id
           },
+          product_seller: item.product_seller,
           quantity: item.quantity
         }));
 
@@ -84,8 +86,9 @@ export const CartProvider = ({ children }) => {
         const data = {
           items: formattedCart,
           total_amount: totalAmount,
-          total_items: totalItems
+          total_items: totalItems,
         };
+        console.log(JSON.stringify(data));
         const accessToken = localStorage.getItem('accessToken');
         const response = await fetch('http://127.0.0.1:8000/cart/add/', {
           method: 'POST',
