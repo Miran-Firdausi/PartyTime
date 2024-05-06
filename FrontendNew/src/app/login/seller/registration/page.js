@@ -1,9 +1,10 @@
 'use client'
-'use client'
 import React, { useState } from 'react';
 import styles from '@/styles/login/SellerRegistration.module.css'; // Importing CSS module
+import { useRouter } from 'next/navigation';
 
 const SellerRegistration = () => {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     email: '',
     first_name: '',
@@ -41,6 +42,41 @@ const SellerRegistration = () => {
       if (response.ok) {
         setSuccessMessage('Registration successful!');
         setErrorMessage('');
+        const loginResponse = await fetch('http://127.0.0.1:8000/api/token/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            email: formData.email,
+            password: formData.password
+          })
+        });
+        const loginData = await loginResponse.json();
+        console.log(loginData);
+        // Handle login response accordingly, e.g., store tokens, redirect user, etc.
+        if (loginResponse.ok) {
+          // Assuming successful login, store tokens in local storage
+          localStorage.setItem('accessToken', loginData.access);
+          localStorage.setItem('refreshToken', loginData.refresh);
+
+          setTimeout(() => {
+            setSuccessMessage('Logging in....');
+          }, 2000);
+
+          // Show "Redirecting to Store...." after 2 seconds
+          setTimeout(() => {
+            setSuccessMessage('Redirecting to Dashboard....');
+          }, 4000);
+  
+          // Redirect to the store page after 4 seconds
+          setTimeout(() => {
+            router.push('http://127.0.0.1:8000/admin/store/productseller/add/');
+          }, 6000);
+        } else {
+          setErrorMessage('An error occurred during login after registration.');
+          setSuccessMessage('');
+        }
       } else {
         // Handle different error scenarios based on the error object returned
         if (data.error?.phone) {

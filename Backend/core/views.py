@@ -69,7 +69,6 @@ def seller_register(request):
                 user = User.objects.create_user(**user_data)
                 user.is_customer = True
                 user.is_seller = True
-                Customer.objects.create(user=user)
                 Seller.objects.create(user=user, aadhar_number=aadhar_number, license_number=license_number, seller_upi=seller_upi)
                 return Response(user_serializer.data, status=201)
             else:
