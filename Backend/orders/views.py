@@ -4,7 +4,7 @@ from rest_framework import status
 from .models import Cart, CartItem, Order, OrderItem
 from .serializers import CartSerializer, CartItemSerializer, OrderSerializer, OrderItemSerializer
 from django.shortcuts import get_object_or_404
-from store.models import Product
+from store.models import Product, ProductSeller
 from core.models import Customer, Seller
 
 
@@ -36,9 +36,13 @@ def add_to_cart(request):
             product_id = item.get('product').get('id')
             product = get_object_or_404(Product, id=product_id)
             product_quantity = item.get('quantity')
+            product_seller_id = item.get('product_seller')
+            product_seller, _ = ProductSeller.objects.get_or_create(id=product_seller_id)
+            
             cart_item, created = CartItem.objects.get_or_create(
                 cart=cart,
                 product=product,
+                product_seller=product_seller, 
                 defaults={'product_quantity': product_quantity}
             )
 

@@ -43,6 +43,7 @@ import styles from "@/styles/product/productsList.module.css"
               discountedPrice={product.sellers[0].discountedPrice}
               image={product.product_image}
               weight={product.weight}
+              product_seller={product.sellers[0].id}
             />
           ))}
         </div>

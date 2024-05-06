@@ -36,7 +36,8 @@ const CustomerLogin = () => {
         discountedPrice: item.product_seller.discountedPrice,
         product_image: item.product.product_image,
         weight: item.product.weight,
-        quantity: item.product_quantity
+        quantity: item.product_quantity,
+        product_seller: item.product_seller.id
       }));
       // Update cart context with fetched cart data
       cartDispatch({ type: 'SET_CART', payload: formattedCart });

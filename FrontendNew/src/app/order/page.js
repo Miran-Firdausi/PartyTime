@@ -1,44 +1,35 @@
 'use client'
-import React from 'react';
-import CartItem from '@/components/cart/CartItem';
-import styles from '@/styles/cart/cart.module.css';
-import { useCart } from '@/contextapi/CartContext';
+// components/Order.js
+import React, { useState } from 'react';
+import styles from '@/styles/order/order.module.css';
+import { useRouter } from 'next/navigation';
 
 const Order = () => {
-  const { cart } = useCart();
-  const totalQuantity = cart.reduce((total, item) => total + item.quantity, 0);
-  const totalPrice = cart.reduce((total, item) => total + (item.discountedPrice * item.quantity), 0);
+  const [loading, setLoading] = useState(true);
+  const router = useRouter();
+
+  // Simulating a delay for the loading animation
+  setTimeout(() => {
+    setLoading(false);
+  }, 2000); // Adjust the delay time as needed
+
+  // Simulating a delay for the order confirmation message
+  setTimeout(() => {
+    router.push('/order/placed-orders');
+  }, 5000); // Adjust the delay time as needed
 
   return (
-    <div>
-      {cart.length === 0 ? (
-          <div className={styles.emptyCartMessage}>
-            <img src="/images/empty-cart.png" alt="Empty-Cart!" className={styles.emptyCartImage} />
-            <p className={styles.emptyCartText}>Your cart is empty. Start adding items!</p>
-          </div>
-        ) : (
-          <>
-      <div className={styles.cartContainer}>
-
-            <div className={styles.cartItemsContainer}>
-              <h2 className={styles.cartHeader}>Your Cart</h2>
-              <div className={styles.cartItems}>
-                {cart.map((item, index) => (
-                  <CartItem key={index} product={item} />
-                ))}
-              </div>
-            </div>
-            <div className={styles.summaryContainer}>
-              <h2 className={styles.summaryHeader}>Cart Summary</h2>
-              <div className={styles.summaryDetails}>
-                <p>Total Items: {cart.length}</p>
-                <p>Total Quantity: {totalQuantity}</p>
-                <p>Total Price: ₹{totalPrice}</p>
-                <button className={styles.proceedButton}>Proceed to Buy</button>
-              </div>
-            </div>
-      </div>
-      </>
+    <div className={styles.orderContainer}>
+      {loading ? (
+        <div className={styles.loadingContainer}>
+          <img src="/images/loading.gif" alt="Loading" className={styles.loadingImage} />
+          <p className={styles.loadingText}>Placing your order...</p>
+        </div>
+      ) : (
+        <div className={styles.orderConfirmation}>
+          <img src="/images/orderplaced.gif" alt="Order Placed" className={styles.orderPlacedImage} />
+          <p className={styles.confirmationText}>Your order has been placed successfully!</p>
+        </div>
       )}
     </div>
   );
