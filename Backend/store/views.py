@@ -45,6 +45,7 @@ def product_detail_view(request):
         product_sellers = ProductSeller.objects.filter(product=product)
         seller_data = []
         for seller in product_sellers:
+            seller.save()
             seller_serializer = ProductSellerSerializer(seller)
             seller_data.append({
                 **seller_serializer.data,
